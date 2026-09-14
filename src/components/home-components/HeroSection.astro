@@ -1,11 +1,5 @@
 ---
-import {
-  ArrowDown,
-  ArrowUpLeft,
-  ArrowUpRight,
-  Check,
-  Rocket,
-} from "@lucide/astro";
+import { ArrowUpRight, ArrowUpLeft, Rocket } from "@lucide/astro";
 import { SIGNUP_URL } from "@/constants";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
@@ -16,57 +10,54 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
 
 <section
   id="home"
-  class="relative overflow-hidden bg-hero pt-9 pb-16 md:pt-14 md:pb-20"
+  class="relative min-h-[811px] overflow-hidden bg-hero pt-9 pb-16 md:pt-[60px] md:pb-15"
   aria-labelledby="hero-title"
 >
   <img
-    class="pointer-events-none absolute top-8 z-10 hidden w-14 object-contain xl:block ltr:left-10 rtl:right-10"
+    class="pointer-events-none absolute top-12 z-10 hidden h-[110px] w-20 object-contain xl:block ltr:left-[60px] ltr:2xl:left-[calc((100vw-1320px)/2)] rtl:right-[60px] rtl:2xl:right-[calc((100vw-1320px)/2)]"
     src="/assistant-robot.png"
     alt="assistant robot"
     aria-hidden="true"
   />
 
   <div
-    class="relative z-10 mx-auto grid w-[calc(100%-40px)] max-w-[1640px] grid-cols-1 items-center gap-8 text-center md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:text-start"
+    class="relative z-10 mx-auto grid w-[calc(100%-40px)] max-w-[1320px] grid-cols-1 items-center gap-8 text-center lg:grid-cols-[563px_minmax(0,654px)] lg:justify-between lg:gap-10 lg:text-start"
   >
-    <div class="mx-auto max-w-185 md:mx-0">
+    <div class="mx-auto max-w-[563px] lg:mx-0">
       <h1
         id="hero-title"
-        class="text-[34px] leading-[1.35] font-black text-[#0b1438] sm:text-[48px] lg:text-[66px] lg:leading-[1.28] [:lang(en)_&]:leading-[1.18] [:lang(en)_&]:tracking-tight"
+        class="text-[34px] leading-[1.35] font-black text-black sm:text-[48px] lg:text-[60px] lg:leading-[1.12] lg:font-bold [:lang(en)_&]:leading-[1.18] [:lang(en)_&]:tracking-tight"
       >
         {t.title}<br />{
           lang === "ar" ? (
-            <>
+            <span class="lg:whitespace-nowrap">
               <span class="text-green">ونصنع</span>{" "}
               <span class="text-brand">جيل المستقبل</span>
-            </>
+            </span>
           ) : (
             <span class="text-brand">{t.highlight}</span>
           )
         }
       </h1>
       <p
-        class="mx-auto mt-5 max-w-165 text-[13px] leading-[2.1] text-muted md:mx-0 md:text-base lg:text-[16px]"
+        class="mx-auto mt-5 max-w-165 text-[13px] leading-[2.1] text-muted md:text-base lg:w-[388px] lg:max-w-[388px] lg:text-[18px] lg:leading-9 ltr:lg:mr-auto ltr:lg:ml-0 rtl:lg:mr-0 rtl:lg:ml-auto"
       >
         {t.description}
       </p>
-      <div
-        class="mt-8 flex flex-col justify-center gap-3 sm:flex-row md:justify-start"
-      >
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:gap-10">
         <a
-          class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[10px] bg-brand-gradient px-6 py-3 text-xs font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
+          class="inline-flex h-[52px] w-[188px] max-w-full items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-6 py-3 text-xs font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
           href={SIGNUP_URL ?? "#future"}
-          >{t.primary}<Arrow size={18} aria-hidden="true" /></a
+          >{t.primary}<Arrow size={17} aria-hidden="true" /></a
         >
         <a
-          class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[10px] border border-line bg-white px-6 py-3 text-xs font-extrabold transition-transform hover:-translate-y-0.5"
-          href="#academy"
-          >{t.secondary}<ArrowDown size={17} aria-hidden="true" /></a
+          class="inline-flex h-14 w-[158px] max-w-full items-center justify-center rounded-xl border-2 border-[#3b5bdb] bg-white px-5 py-3 text-xs font-extrabold text-[#1c2d5a] transition-transform hover:-translate-y-0.5"
+          href="#academy">{t.secondary}</a
         >
       </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-180 md:max-w-none">
+    <div class="relative mx-auto w-full max-w-[654px] md:max-w-[654px]">
       <img
         class="relative z-10 w-full object-contain"
         src="/hero-student.jpg"
@@ -79,7 +70,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
   </div>
 
   <div
-    class="relative z-20 mx-auto mt-6 grid w-[calc(100%-40px)] max-w-[1640px] grid-cols-1 items-center gap-8 rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:grid-cols-[280px_1fr] md:px-10 md:py-6"
+    class="relative z-20 mx-auto mt-5 grid min-h-[180px] w-[calc(100%-40px)] max-w-[1320px] grid-cols-1 items-center gap-8 rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:grid-cols-[280px_1fr] md:px-10 md:py-6"
   >
     <div class="flex items-center justify-center gap-3 md:justify-start">
       <span
@@ -93,8 +84,21 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
         >
       </div>
     </div>
+    <div class="relative hidden sm:block">
+      <span
+        class="absolute inset-x-[5%] top-[32%] z-0 h-1 rounded-full bg-[linear-gradient(90deg,#05df72_0%,#a3b3ff_50%,#e5e7eb_100%)]"
+        aria-hidden="true"></span>
+      <img
+        class="relative z-10 w-full object-contain"
+        src="/progress-steps.png"
+        width="1504"
+        height="210"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
     <ol
-      class="relative m-0 grid list-none grid-cols-2 gap-x-2 gap-y-5 p-0 sm:grid-cols-4 sm:gap-0 sm:before:absolute sm:before:inset-x-[12.5%] sm:before:top-4.5 sm:before:h-0.5 sm:before:bg-linear-to-r ltr:sm:before:from-brand/40 ltr:sm:before:to-green/40 rtl:sm:before:from-green/40 rtl:sm:before:to-brand/40"
+      class="relative m-0 grid list-none grid-cols-2 gap-x-2 gap-y-5 p-0 sm:hidden"
     >
       {
         t.stages.map((stage, index) => (
@@ -105,7 +109,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
                 index === t.stages.length - 1 ? "bg-green" : "bg-brand",
               ]}
             >
-              {index === t.stages.length - 1 ? <Check size={15} /> : index + 1}
+              {index + 1}
             </span>
             <>
               <b class="block text-[11px]">{stage.title}</b>

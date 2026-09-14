@@ -24,11 +24,17 @@ const stepImages = [
   "/points-badge.jpg",
   "/reward-ticket.png",
 ];
+const stepImageSizes = [
+  "h-[39px] w-[46px]",
+  "h-10 w-[41px]",
+  "h-[54px] w-[49px] rounded-full",
+  "h-[43px] w-14",
+];
 ---
 
 <section
   id="rewards"
-  class="relative overflow-hidden bg-[#f7f7ff] py-24 md:py-28"
+  class="relative overflow-hidden bg-[#f7f7ff] py-24 md:py-28 lg:min-h-[1163px]"
   aria-labelledby="rewards-title"
 >
   <img
@@ -41,7 +47,7 @@ const stepImages = [
   />
   <img
     class="pointer-events-none absolute top-20 hidden w-28 lg:block ltr:left-[7%] rtl:right-[7%]"
-    src="/reward-ticket.png"
+    src="/reward-ticket-alt.png"
     width="292"
     height="264"
     alt=""
@@ -203,11 +209,11 @@ const stepImages = [
       {
         t.steps.map((step, index) => (
           <div class="flex items-center justify-center gap-4 px-3 py-5">
-            <span class="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#eceaff]">
+            <span class="flex size-[86px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#eceaff]">
               <img
                 class:list={[
-                  "size-9 object-contain",
-                  index === 2 && "scale-[1.5] rounded-full",
+                  "object-contain",
+                  stepImageSizes[index],
                 ]}
                 src={stepImages[index]}
                 width="56"
@@ -222,9 +228,11 @@ const stepImages = [
       }
     </div>
 
-    <a
-      class="mx-auto mt-16 flex min-h-14 min-w-[260px] items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-9 py-3 text-sm font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
-      href="#future">{t.cta}<Arrow size={18} aria-hidden="true" /></a
-    >
+    <div class="mt-16 text-center">
+      <a
+        class="inline-flex min-h-[60px] w-[263px] max-w-full items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-9 py-3 text-sm font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
+        href="#future">{t.cta}<Arrow size={18} aria-hidden="true" /></a
+      >
+    </div>
   </div>
 </section>
