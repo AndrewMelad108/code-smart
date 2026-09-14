@@ -1,0 +1,121 @@
+---
+import {
+  ArrowDown,
+  ArrowUpLeft,
+  ArrowUpRight,
+  Check,
+  Rocket,
+} from "@lucide/astro";
+import { SIGNUP_URL } from "@/constants";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang)("hero");
+const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
+---
+
+<section
+  id="home"
+  class="relative overflow-hidden bg-hero pt-9 pb-16 md:pt-14 md:pb-20"
+  aria-labelledby="hero-title"
+>
+  <img
+    class="pointer-events-none absolute top-8 z-10 hidden w-14 object-contain xl:block ltr:left-10 rtl:right-10"
+    src="/assistant-robot.png"
+    alt="assistant robot"
+    aria-hidden="true"
+  />
+
+  <div
+    class="relative z-10 mx-auto grid w-[calc(100%-40px)] max-w-[1640px] grid-cols-1 items-center gap-8 text-center md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:text-start"
+  >
+    <div class="mx-auto max-w-185 md:mx-0">
+      <h1
+        id="hero-title"
+        class="text-[34px] leading-[1.35] font-black text-[#0b1438] sm:text-[48px] lg:text-[66px] lg:leading-[1.28] [:lang(en)_&]:leading-[1.18] [:lang(en)_&]:tracking-tight"
+      >
+        {t.title}<br />{
+          lang === "ar" ? (
+            <>
+              <span class="text-green">ونصنع</span>{" "}
+              <span class="text-brand">جيل المستقبل</span>
+            </>
+          ) : (
+            <span class="text-brand">{t.highlight}</span>
+          )
+        }
+      </h1>
+      <p
+        class="mx-auto mt-5 max-w-165 text-[13px] leading-[2.1] text-muted md:mx-0 md:text-base lg:text-[16px]"
+      >
+        {t.description}
+      </p>
+      <div
+        class="mt-8 flex flex-col justify-center gap-3 sm:flex-row md:justify-start"
+      >
+        <a
+          class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[10px] bg-brand-gradient px-6 py-3 text-xs font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
+          href={SIGNUP_URL ?? "#future"}
+          >{t.primary}<Arrow size={18} aria-hidden="true" /></a
+        >
+        <a
+          class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[10px] border border-line bg-white px-6 py-3 text-xs font-extrabold transition-transform hover:-translate-y-0.5"
+          href="#academy"
+          >{t.secondary}<ArrowDown size={17} aria-hidden="true" /></a
+        >
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-180 md:max-w-none">
+      <img
+        class="relative z-10 w-full object-contain"
+        src="/hero-student.jpg"
+        width="1448"
+        height="1086"
+        alt={t.imageAlt}
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+
+  <div
+    class="relative z-20 mx-auto mt-6 grid w-[calc(100%-40px)] max-w-[1640px] grid-cols-1 items-center gap-8 rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:grid-cols-[280px_1fr] md:px-10 md:py-6"
+  >
+    <div class="flex items-center justify-center gap-3 md:justify-start">
+      <span
+        class="flex size-12 items-center justify-center rounded-[16px] bg-brand-soft text-brand"
+        ><Rocket size={22} aria-hidden="true" /></span
+      >
+      <div>
+        <b class="block text-xl font-black text-ink">{t.experience}</b><strong
+          class="mt-0.5 block text-2xl font-black text-green"
+          >{t.experienceHighlight}</strong
+        >
+      </div>
+    </div>
+    <ol
+      class="relative m-0 grid list-none grid-cols-2 gap-x-2 gap-y-5 p-0 sm:grid-cols-4 sm:gap-0 sm:before:absolute sm:before:inset-x-[12.5%] sm:before:top-4.5 sm:before:h-0.5 sm:before:bg-linear-to-r ltr:sm:before:from-brand/40 ltr:sm:before:to-green/40 rtl:sm:before:from-green/40 rtl:sm:before:to-brand/40"
+    >
+      {
+        t.stages.map((stage, index) => (
+          <li class="relative z-10 text-center">
+            <span
+              class:list={[
+                "mx-auto mb-2 flex size-9 items-center justify-center rounded-full border-[5px] border-white text-[10px] text-white ring-1 ring-[#e2e0fb]",
+                index === t.stages.length - 1 ? "bg-green" : "bg-brand",
+              ]}
+            >
+              {index === t.stages.length - 1 ? <Check size={15} /> : index + 1}
+            </span>
+            <>
+              <b class="block text-[11px]">{stage.title}</b>
+              <small class="mt-0.5 block text-[8px] text-[#9298af]">
+                {stage.note}
+              </small>
+            </>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,139 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang)("why");
+const cardImages = [
+  "/idea-lightbulb.png",
+  "/learning-path-web.png",
+  "/task-clipboard.png",
+  "/graduation-cap.png",
+];
+const cardAccents = [
+  "text-[#ff7b2f]",
+  "text-[#4f7cff]",
+  "text-[#15c7aa]",
+  "text-[#7b55ff]",
+];
+const cardPositions = [
+  "md:mt-20",
+  "md:mt-28",
+  "md:mt-28",
+  "md:mt-20",
+];
+---
+
+<section
+  id="why-code-smart"
+  class="relative overflow-hidden bg-[#f8f8ff] py-24 md:py-36"
+  aria-labelledby="why-title"
+>
+  <div class="mx-auto w-[calc(100%-40px)] max-w-[1640px]">
+    <header class="mx-auto mb-10 max-w-[820px] text-center md:mb-12">
+      <span
+        class="mb-3 block text-[8px] font-extrabold tracking-[.28em] text-[#b9bed6] uppercase"
+        >{t.eyebrow}</span
+      >
+      <h2
+        id="why-title"
+        class="text-[30px] leading-[1.35] font-black text-[#0b1438] sm:text-[40px] lg:text-[50px]"
+      >
+        {t.titleBefore}{" "}<bdi class="text-brand" dir="ltr"
+          >{t.titleBrand}</bdi
+        >{t.titleAfter}
+      </h2>
+      <span class="mx-auto mt-4 block h-0.5 w-12 rounded-full bg-brand"></span>
+      <p
+        class="mx-auto mt-5 max-w-180 text-[12px] leading-7 text-muted lg:text-sm"
+      >
+        {t.description}
+      </p>
+    </header>
+
+    <div
+      class="relative mx-auto -mb-12 hidden h-28 max-w-[1300px] md:block"
+      aria-hidden="true"
+    >
+      <span
+        class="absolute inset-x-[7%] top-16 h-24 rounded-[50%] border-t-2 border-[#d9e5ff]"
+      ></span>
+      {
+        [
+          "inset-s-[6%] text-[#ff7b2f]",
+          "inset-s-[34%] text-[#4f7cff]",
+          "inset-s-[63%] text-[#15c7aa]",
+          "inset-e-[6%] text-[#7b55ff]",
+        ].map((classes) => (
+          <i
+            class:list={[
+              "absolute top-11 flex size-8 items-center justify-center rounded-full border border-current bg-white text-[9px] font-black shadow-card",
+              classes,
+            ]}
+          >
+            01
+          </i>
+        ))
+      }
+      <img
+        class="absolute start-1/2 top-0 h-24 w-24 -translate-x-1/2 object-contain rtl:translate-x-1/2"
+        src="/why-code-smart-mark.png"
+        width="276"
+        height="276"
+        alt=""
+      />
+    </div>
+
+    <div
+      class="relative z-10 mx-auto grid max-w-[1420px] grid-cols-1 items-start gap-5 sm:grid-cols-2 md:grid-cols-4"
+    >
+      {
+        t.cards.map((card, index) => (
+            <article
+              class:list={[
+                "min-h-48 rounded-[10px] border border-[#eef0fb] bg-white px-7 py-7 text-center shadow-card",
+                cardPositions[index],
+              ]}
+            >
+              <span
+                class:list={[
+                  "mx-auto mb-5 flex size-14 items-center justify-center rounded-2xl bg-[#f4f6ff]",
+                  cardAccents[index],
+                ]}
+              >
+                <img
+                  class="max-h-9 w-auto object-contain"
+                  src={cardImages[index]}
+                  width="56"
+                  height="56"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </span>
+              <>
+                <small class:list={["mb-2 block text-[10px] font-black", cardAccents[index]]}>
+                  0{index + 1}
+                </small>
+                <h3 class="text-[15px] font-black text-[#1C3461]">
+                  {card.title}
+                </h3>
+                <p class="mt-3 text-[11px] leading-6 text-muted">
+                  {card.description}
+                </p>
+              </>
+            </article>
+        ))
+      }
+      <div
+        class="absolute start-1/2 top-4 hidden w-20 -translate-x-1/2 md:block rtl:translate-x-1/2"
+        aria-hidden="true"
+      >
+        <img src="/code-smart-robot.png" width="160" height="192" alt="" />
+      </div>
+    </div>
+    <p
+      class="mx-auto mt-14 w-fit max-w-full rounded-full border border-line bg-white px-7 py-3 text-center text-xs font-extrabold text-brand shadow-card"
+    >
+      {t.footer}
+    </p>
+  </div>
+</section>

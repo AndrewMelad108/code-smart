@@ -1,0 +1,88 @@
+---
+import { ArrowUp, MessageCircle } from "@lucide/astro";
+import { getLangFromUrl, localizePath, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translate = useTranslations(lang);
+const t = translate("footer");
+const nav = translate("header");
+const links = [
+  { href: "#home", label: nav.home },
+  { href: "#why-code-smart", label: nav.why },
+  { href: "#learning-path", label: nav.learning },
+  { href: "#academy", label: nav.academy },
+];
+---
+
+<footer class="bg-[#172c62] text-white">
+  <div class="mx-auto w-[calc(100%_-_40px)] max-w-[1640px]">
+    <div
+      class="grid grid-cols-1 gap-8 py-11 sm:grid-cols-2 md:grid-cols-[1.15fr_.75fr_1fr_.9fr] md:gap-12 md:py-14"
+    >
+      <div>
+        <a href={localizePath("/", lang)}
+          ><img
+            class="h-[78px] w-[105px] rounded-[13px] object-contain"
+            src="/code-smart-academy-logo.png"
+            width="1600"
+            height="1600"
+            alt="Code Smart Academy"
+          /></a
+        >
+        <p class="mt-3 max-w-[280px] text-sm leading-6 text-white/60">
+          {t.description}
+        </p>
+      </div>
+      <nav aria-label={t.quickLinks}>
+        <h2 class="mb-4 text-xs font-extrabold">{t.quickLinks}</h2><ul
+          class="grid list-none gap-2.5 p-0 text-sm text-white/60"
+        >
+          {
+            links.map((link) => (
+              <li>
+                <a class="hover:text-white" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <nav aria-label={t.tracks}>
+        <h2 class="mb-4 text-xs font-extrabold">{t.tracks}</h2><ul
+          class="grid list-none gap-2.5 p-0 text-sm text-white/60"
+        >
+          {
+            t.trackLinks.map((track) => (
+              <li>
+                <a class="hover:text-white" href="#learning-path" dir="ltr">
+                  {track}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div>
+        <h2 class="mb-4 text-xs font-extrabold">{t.contact}</h2><p
+          class="flex items-start gap-2 text-sm leading-5 text-white/60"
+        >
+          <MessageCircle class="mt-0.5" size={15} aria-hidden="true" />{
+            t.contactNote
+          }
+        </p>
+      </div>
+    </div>
+    <div
+      class="relative flex flex-col items-start gap-3 border-t border-white/10 py-5 text-[9px] text-white/50 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+    >
+      <p>© {new Date().getFullYear()} Code Smart Academy. {t.rights}</p><p>
+        {t.note}
+      </p><a
+        href="#home"
+        class="absolute end-0 top-4 flex size-9 items-center justify-center rounded-lg border border-white/20 text-white sm:static"
+        aria-label={t.back}><ArrowUp size={18} aria-hidden="true" /></a
+      >
+    </div>
+  </div>
+</footer>

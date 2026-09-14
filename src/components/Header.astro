@@ -1,0 +1,131 @@
+---
+import { LOGIN_URL } from "@/constants";
+import { getLangFromUrl, localizePath, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang)("header");
+const links = [
+  { href: "#home", label: t.home },
+  { href: "#why-code-smart", label: t.why },
+  { href: "#learning-path", label: t.learning },
+  { href: "#age-groups", label: t.ages },
+  { href: "#academy", label: t.academy },
+  { href: "#rewards", label: t.rewards },
+];
+---
+
+<header
+  class="font-header sticky top-0 z-50 max-h-23 bg-white px-15 shadow-header"
+>
+  <div class="flex items-center justify-between">
+    <a
+      href={localizePath("/", lang)}
+      class="h-17 w-19.5 shrink-0 overflow-hidden"
+      aria-label="Code Smart Academy"
+    >
+      <img
+        class="size-full object-contain"
+        src="/code-smart-academy-logo.png"
+        alt="Code Smart Academy"
+      />
+    </a>
+    <nav
+      class="hidden items-center justify-center gap-8 text-lg leading-5 font-semibold text-navy min-[1100px]:flex"
+      aria-label={t.menu}
+    >
+      {
+        links.map((link, index) => (
+          <a
+            class="relative inline-flex min-h-9 items-center rounded-md px-3.5 py-2 transition-colors hover:text-[#594CE3] aria-[current=page]:text-[#594CE3] aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-[20%] aria-[current=page]:after:-bottom-2.5 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-[#594CE3]"
+            href={link.href}
+            aria-current={index === 0 ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button
+      class="rounded-xl bg-brand-gradient px-5 py-2.5 text-base leading-5 font-bold text-white shadow-button"
+      >{t.signup}</button
+    >
+
+    <a
+      class="relative top-0 z-10 inline-flex h-13 min-w-11 items-center justify-center self-start rounded-b-xl bg-green px-3 text-xl text-[10px] leading-none font-black text-white"
+      data-language-switch
+      href={localizePath(Astro.url.pathname, lang === "ar" ? "en" : "ar")}
+      aria-label={t.languageLabel}
+      lang={lang === "ar" ? "en" : "ar"}>{t.language}</a
+    >
+  </div>
+
+  <nav
+    id="mobile-navigation"
+    class="mx-auto grid w-[calc(100%-40px)] max-w-[1640px] gap-1 border-t border-line py-3 text-[13px] min-[1100px]:hidden [&_a]:rounded-lg [&_a]:px-3 [&_a]:py-2.5 [&_a:hover]:bg-brand-soft [&_a:hover]:text-brand"
+    aria-label={t.menu}
+    hidden
+  >
+    {
+      links.map((link, index) => (
+        <a href={link.href} aria-current={index === 0 ? "page" : undefined}>
+          {link.label}
+        </a>
+      ))
+    }
+    <a href="#future">{t.future}</a>
+    {
+      LOGIN_URL ? (
+        <a href={LOGIN_URL}>{t.login}</a>
+      ) : (
+        <span class="rounded-lg px-3 py-2.5 text-muted">
+          {t.login} — {t.unavailable}
+        </span>
+      )
+    }
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const menu = document.querySelector<HTMLElement>("#mobile-navigation");
+
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute(
+      "aria-label",
+      (open ? toggle.dataset.closeLabel : toggle.dataset.openLabel) ?? "",
+    );
+    menu.hidden = !open;
+  }
+
+  toggle?.addEventListener("click", () =>
+    setOpen(toggle.getAttribute("aria-expanded") !== "true"),
+  );
+  menu
+    ?.querySelectorAll("a")
+    .forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      toggle?.getAttribute("aria-expanded") === "true"
+    ) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  window
+    .matchMedia("(min-width: 1100px)")
+    .addEventListener("change", () => setOpen(false));
+  document
+    .querySelectorAll<HTMLAnchorElement>("[data-language-switch]")
+    .forEach((link) => {
+      link.addEventListener("click", () => {
+        const target = new URL(link.href);
+        target.search = window.location.search;
+        target.hash = window.location.hash;
+        link.href = target.href;
+      });
+    });
+</script>

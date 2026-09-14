@@ -1,0 +1,230 @@
+---
+import { ArrowLeft, ArrowRight, Sparkles, Star } from "@lucide/astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang)("rewards");
+const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
+
+const rewardCard = {
+  ...t.cards[1],
+  type: "reward",
+  accent: "green",
+};
+const taskCard = {
+  ...t.cards[0],
+  type: "task",
+  accent: "purple",
+};
+const sideCards =
+  lang === "ar" ? [rewardCard, taskCard] : [taskCard, rewardCard];
+const stepImages = [
+  "/graduation-cap.png",
+  "/reward-gift.png",
+  "/points-badge.jpg",
+  "/reward-ticket.png",
+];
+---
+
+<section
+  id="rewards"
+  class="relative overflow-hidden bg-[#f7f7ff] py-24 md:py-28"
+  aria-labelledby="rewards-title"
+>
+  <img
+    class="pointer-events-none absolute top-20 hidden w-28 lg:block ltr:right-[7%] rtl:left-[7%]"
+    src="/reward-coin.png"
+    width="265"
+    height="316"
+    alt=""
+    aria-hidden="true"
+  />
+  <img
+    class="pointer-events-none absolute top-20 hidden w-28 lg:block ltr:left-[7%] rtl:right-[7%]"
+    src="/reward-ticket.png"
+    width="292"
+    height="264"
+    alt=""
+    aria-hidden="true"
+  />
+
+  <span
+    class="pointer-events-none absolute bottom-10 left-[9%] size-2 rotate-45 bg-[#d8c9ff]"
+    aria-hidden="true"></span>
+  <span
+    class="pointer-events-none absolute right-[12%] bottom-8 size-1.5 rotate-45 bg-[#c9d1ff]"
+    aria-hidden="true"></span>
+
+  <div class="mx-auto w-[calc(100%-40px)] max-w-[1320px]">
+    <header class="mx-auto mb-12 max-w-[760px] text-center">
+      <span
+        class="mb-3 block text-[9px] font-extrabold tracking-[.32em] text-[#9da7c7] uppercase"
+        >{t.eyebrow}</span
+      >
+      <h2
+        id="rewards-title"
+        class="text-[32px] leading-[1.35] font-black text-[#172852] sm:text-[40px]"
+      >
+        {t.title}
+      </h2>
+      <span
+        class="mx-auto mt-3 block h-0.5 w-12 rounded-full bg-[#5b62ed]"
+        aria-hidden="true"></span>
+      <p class="mx-auto mt-5 text-xs leading-7 text-muted lg:text-sm">
+        {t.description}
+      </p>
+    </header>
+
+    <div
+      class="relative mx-auto grid grid-cols-1 items-center gap-6 [direction:ltr] sm:grid-cols-2 lg:grid-cols-[400px_430px_400px] lg:gap-[45px]"
+    >
+      <svg
+        class="pointer-events-none absolute inset-0 z-0 hidden h-full w-full lg:block"
+        viewBox="0 0 1320 460"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M 620 72 C 535 78 500 195 390 214"
+          fill="none"
+          stroke={lang === "ar" ? "#3dcfd2" : "#7367ef"}
+          stroke-width="2"
+          stroke-dasharray="6 7"></path>
+        <path
+          d="M 700 72 C 785 78 820 195 930 214"
+          fill="none"
+          stroke={lang === "ar" ? "#7367ef" : "#3dcfd2"}
+          stroke-width="2"
+          stroke-dasharray="6 7"></path>
+      </svg>
+
+      {
+        sideCards.map((card, index) => (
+          <>
+            {index === 1 && (
+              <div class="relative z-10 order-3 flex min-h-[460px] flex-col items-center justify-center sm:col-span-2 lg:order-2 lg:col-span-1">
+                <div class="relative flex h-[370px] w-full items-center justify-center">
+                  <span class="absolute top-0 z-20 size-32 overflow-hidden rounded-full border-4 border-[#f7f7ff] shadow-[0_12px_28px_-12px_rgba(89,76,227,.5)]">
+                    <img
+                      class="size-full scale-[1.48] object-cover"
+                      src="/points-badge.jpg"
+                      width="416"
+                      height="416"
+                      alt={t.points}
+                    />
+                  </span>
+                  <img
+                    class="relative z-10 mt-20 w-[340px] -translate-y-8 object-contain"
+                    src="/rewards-chest.png"
+                    width="606"
+                    height="602"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </div>
+                <strong class="-mt-2 rounded-full bg-[#eceaff] px-5 py-2 text-sm font-bold text-[#5b55e7]">
+                  {t.pointsCta}
+                </strong>
+              </div>
+            )}
+
+            <article
+              class:list={[
+                "relative z-10 flex min-h-[460px] flex-col items-center rounded-3xl border border-[#e8e8f5] bg-white px-8 py-8 text-center shadow-[0_14px_36px_-28px_rgba(42,48,99,.32)]",
+                index === 0 ? "order-1" : "order-2 lg:order-3",
+              ]}
+              dir={lang === "ar" ? "rtl" : "ltr"}
+            >
+              {card.type === "reward" ? (
+                <div class="relative mb-3 h-[205px] w-[245px]">
+                  <img
+                    class="mx-auto h-[185px] object-contain"
+                    src={card.image}
+                    width="283"
+                    height="318"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="absolute right-0 bottom-2 flex size-20 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#7662f1,#5144d8)] text-[36px] font-black text-white shadow-lg">
+                    %
+                  </span>
+                  <span class="absolute bottom-4 left-1 flex size-11 items-center justify-center rounded-full bg-[#1bc879] text-white shadow-md">
+                    <Star size={23} fill="currentColor" aria-hidden="true" />
+                  </span>
+                  <Sparkles
+                    class="absolute top-5 right-2 text-[#6c63ee]"
+                    size={22}
+                    aria-hidden="true"
+                  />
+                </div>
+              ) : (
+                <img
+                  class="mb-3 h-[205px] w-[220px] object-contain"
+                  src={card.image}
+                  width="466"
+                  height="508"
+                  alt=""
+                  aria-hidden="true"
+                />
+              )}
+
+              <h3 class="mt-2 text-[30px] leading-10 font-black text-[#111c3d]">
+                {card.title}
+              </h3>
+              <p class="mt-2 max-w-[300px] text-sm leading-7 text-muted">
+                {card.description}
+              </p>
+              <div
+                class="mt-auto flex items-center justify-center gap-2"
+                aria-hidden="true"
+              >
+                {Array.from({ length: 7 }).map((_, dotIndex) => (
+                  <span
+                    class:list={[
+                      "size-3 rounded-full",
+                      dotIndex < 3
+                        ? card.accent === "green"
+                          ? "bg-[#28c875]"
+                          : "bg-[#6d63ed]"
+                        : "bg-[#d8d8d8]",
+                    ]}
+                  />
+                ))}
+              </div>
+            </article>
+          </>
+        ))
+      }
+    </div>
+
+    <div
+      class="relative mx-auto mt-12 grid min-h-[140px] max-w-[1320px] grid-cols-2 items-center rounded-3xl border border-[#dfdcfa] bg-[#f5f3ff] px-5 sm:grid-cols-4"
+    >
+      {
+        t.steps.map((step, index) => (
+          <div class="flex items-center justify-center gap-4 px-3 py-5">
+            <span class="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#eceaff]">
+              <img
+                class:list={[
+                  "size-9 object-contain",
+                  index === 2 && "scale-[1.5] rounded-full",
+                ]}
+                src={stepImages[index]}
+                width="56"
+                height="56"
+                alt=""
+                aria-hidden="true"
+              />
+            </span>
+            <b class="text-sm font-bold text-[#151a36]">{step}</b>
+          </div>
+        ))
+      }
+    </div>
+
+    <a
+      class="mx-auto mt-16 flex min-h-14 min-w-[260px] items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-9 py-3 text-sm font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
+      href="#future">{t.cta}<Arrow size={18} aria-hidden="true" /></a
+    >
+  </div>
+</section>
