@@ -52,15 +52,14 @@ const stepColors = [
 >
   <span
     class="pointer-events-none absolute top-2 left-[20%] size-2 rotate-45 bg-[#aeb8f5]"
-    aria-hidden="true"
-  ></span>
+    aria-hidden="true"></span>
 
   <div class="mx-auto w-[calc(100%-40px)] max-w-[1320px]">
     <div
-      class="grid grid-cols-1 items-start gap-8 [direction:ltr] lg:grid-cols-[.95fr_1.05fr] lg:gap-14"
+      class="future-layout grid grid-cols-1 items-start gap-8 [direction:ltr] lg:grid-cols-[.95fr_1.05fr] lg:gap-14"
     >
       <div
-        class="relative z-10 w-full pb-6 text-center rtl:[direction:rtl] ltr:[direction:ltr] lg:max-w-[540px] lg:justify-self-start lg:pt-6 lg:pb-0"
+        class="future-copy relative z-10 w-full pb-6 text-center lg:max-w-[540px] lg:justify-self-start lg:pt-6 lg:pb-0 ltr:[direction:ltr] rtl:[direction:rtl]"
       >
         <span
           class="mb-7 inline-flex items-center gap-2 rounded-full bg-[#7555ed] px-4 py-2 text-[11px] font-bold text-white shadow-[0_8px_20px_-8px_rgba(89,76,227,.75)]"
@@ -73,7 +72,8 @@ const stepColors = [
           id="future-title"
           class="text-[34px] leading-[1.3] font-black text-[#12224f] sm:text-[38px] lg:text-[38px] lg:whitespace-nowrap"
         >
-          {t.title} <bdi dir="ltr">{t.year}</bdi>
+          {t.title}
+          <bdi dir="ltr">{t.year}</bdi>
         </h2>
         <h3
           class="mt-5 text-[17px] leading-[1.75] font-black text-[#20bf68] sm:text-[18px] lg:text-[18px] lg:whitespace-nowrap"
@@ -89,7 +89,7 @@ const stepColors = [
         </p>
 
         <div
-          class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 [direction:ltr]"
+          class="future-stats mt-8 grid grid-cols-1 gap-3 [direction:ltr] sm:grid-cols-3"
         >
           {
             t.stats.map((stat, index) => {
@@ -120,12 +120,12 @@ const stepColors = [
                   >
                     {stat.value}
                   </strong>
-                  <b class="mt-2 block text-[11px] text-[#182953]"
-                    >{stat.label}</b
-                  >
-                  <small class="mt-1 block text-[9px] text-muted"
-                    >{stat.note}</small
-                  >
+                  <b class="mt-2 block text-[11px] text-[#182953]">
+                    {stat.label}
+                  </b>
+                  <small class="mt-1 block text-[9px] text-muted">
+                    {stat.note}
+                  </small>
                 </article>
               );
             })
@@ -134,7 +134,7 @@ const stepColors = [
       </div>
 
       <div
-        class="relative w-full max-w-[610px] justify-self-end self-start lg:pt-6"
+        class="future-image relative w-full max-w-[610px] self-start justify-self-end lg:pt-6"
       >
         <img
           class="w-full object-contain object-bottom lg:h-[525px] lg:object-cover lg:object-top"
@@ -147,13 +147,14 @@ const stepColors = [
     </div>
 
     <div
-      class="relative z-20 mx-auto mt-6 grid max-w-[1100px] items-center overflow-hidden rounded-3xl border border-[#e5e5f6] bg-white px-6 py-7 shadow-[0_18px_45px_-30px_rgba(44,49,107,.38)] [direction:ltr] lg:-mt-8 lg:grid-cols-[1.15fr_76px_2fr] lg:px-9"
+      class="future-grant relative z-20 mx-auto mt-6 grid max-w-[1100px] items-center overflow-hidden rounded-3xl border border-[#e5e5f6] bg-white px-6 py-7 shadow-[0_18px_45px_-30px_rgba(44,49,107,.38)] [direction:ltr] lg:-mt-8 lg:grid-cols-[1.15fr_76px_2fr] lg:px-9"
     >
       <div
-        class="text-center rtl:[direction:rtl] ltr:[direction:ltr] lg:text-start"
+        class="text-center lg:text-start ltr:[direction:ltr] rtl:[direction:rtl]"
       >
         <h3 class="text-base leading-7 font-black text-[#1b2c58]">
-          {t.grantTitle} <bdi class="text-brand" dir="ltr">Code Smart</bdi>.
+          {t.grantTitle}
+          <bdi class="text-brand" dir="ltr">Code Smart</bdi>.
         </h3>
         <p class="mt-2 text-[11px] leading-6 text-muted">
           {t.grantDescription}
@@ -172,7 +173,7 @@ const stepColors = [
       </span>
 
       <div
-        class="grid grid-cols-2 rtl:[direction:rtl] ltr:[direction:ltr] sm:grid-cols-4"
+        class="grid grid-cols-2 sm:grid-cols-4 ltr:[direction:ltr] rtl:[direction:rtl]"
       >
         {
           t.steps.map((step, index) => {
@@ -188,12 +189,12 @@ const stepColors = [
                 >
                   <StepIcon size={17} aria-hidden="true" />
                 </span>
-                <b class="mt-2 text-[10px] leading-5 text-[#1c2c55]"
-                  >{step.title}</b
-                >
-                <small class="text-[8px] leading-4 text-muted"
-                  >{step.note}</small
-                >
+                <b class="mt-2 text-[10px] leading-5 text-[#1c2c55]">
+                  {step.title}
+                </b>
+                <small class="text-[8px] leading-4 text-muted">
+                  {step.note}
+                </small>
               </div>
             );
           })
@@ -201,8 +202,10 @@ const stepColors = [
       </div>
     </div>
 
-    <div class="mx-auto mt-10 max-w-2xl text-center">
-      <h3 class="text-[24px] leading-9 font-black text-[#152552] lg:text-[30px]">
+    <div class="future-action mx-auto mt-10 max-w-2xl text-center">
+      <h3
+        class="text-[24px] leading-9 font-black text-[#152552] lg:text-[30px]"
+      >
         {t.question}
       </h3>
       <p class="mt-2 text-xs text-muted lg:text-sm">{t.questionNote}</p>

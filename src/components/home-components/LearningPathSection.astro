@@ -31,7 +31,15 @@ const colors = ["#10b981", "#3b5bdb", "#7c3aed"];
     <div class="roadmap-art web-art hidden lg:block">
       <img src="/learning-path-web.png" width="2000" height="711" alt="" />
     </div>
-    <img src="/green-learning-path-2.png" class="mt-8 block lg:hidden" />
+    <div class="mobile-roadmap-art">
+      <img
+        src="/green-learning-path-2.png"
+        width="1536"
+        height="1024"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
     <img
       class="student-robot"
       src="/learning-student-robot.png"
@@ -67,7 +75,38 @@ const colors = ["#10b981", "#3b5bdb", "#7c3aed"];
       >Junior<br />Front-End<br />Developer</span
     >
 
-    <svg class="roadmap-connectors">
+    <svg class="roadmap-connectors" aria-hidden="true">
+      <defs>
+        {
+          colors.map((color, index) => (
+            <>
+              <marker
+                id={`roadmap-dot-${index}`}
+                viewBox="0 0 6 6"
+                refX="3"
+                refY="3"
+                markerWidth="6"
+                markerHeight="6"
+                markerUnits="userSpaceOnUse"
+              >
+                <circle cx="3" cy="3" r="3" fill={color} />
+              </marker>
+              <marker
+                id={`roadmap-arrow-${index}`}
+                viewBox="0 0 8 8"
+                refX="7"
+                refY="4"
+                markerWidth="8"
+                markerHeight="8"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M 0 0 L 8 4 L 0 8 Z" fill={color} />
+              </marker>
+            </>
+          ))
+        }
+      </defs>
       <path data-link="beginner" fill="none" stroke="#10b981"></path>
       <path data-link="python" fill="none" stroke="#3b5bdb"></path>
       <path data-link="web" fill="none" stroke="#7c3aed"></path>
@@ -133,7 +172,7 @@ const colors = ["#10b981", "#3b5bdb", "#7c3aed"];
               <>
                 اختر مسارك حسب
                 <br />
-                ميولك واهتماماتك
+                <strong class="choice-interests">ميولك واهتماماتك</strong>
               </>
             ) : (
               <>
@@ -970,7 +1009,7 @@ const colors = ["#10b981", "#3b5bdb", "#7c3aed"];
     const choice = scene.querySelector<HTMLElement>(".roadmap-choice");
     const cards = [...scene.querySelectorAll<HTMLElement>(".roadmap-card")];
     if (!svg || !choice) return;
-    const paths = svg.querySelectorAll("path");
+    const paths = svg.querySelectorAll("path[data-link]");
     const update = () => {
       const bounds = scene.getBoundingClientRect(),
         c = choice.getBoundingClientRect();
@@ -1009,17 +1048,25 @@ const colors = ["#10b981", "#3b5bdb", "#7c3aed"];
             .querySelector<HTMLElement>(".beginner-platform")!
             .getBoundingClientRect();
           const rtl = document.documentElement.dir === "rtl",
-            x1 = platform.left + platform.width / 2 - bounds.left,
+            x1 = (rtl ? platform.right - 8 : platform.left + 8) - bounds.left,
             y1 = platform.bottom - bounds.top;
           const x2 = (rtl ? c.right : c.left) - bounds.left,
-            y2 = c.top + c.height / 2 - bounds.top,
-            bend = x1 + (rtl ? 20 : -20);
+            y2 = c.top + 32 - bounds.top,
+            bend = x1 + (rtl ? 70 : -70);
           d = `M ${x1} ${y1} C ${bend} ${y1} ${bend} ${y2} ${x2} ${y2}`;
         } else {
-          const x = c.left + c.width * (index === 1 ? 0.45 : 0.6) - bounds.left,
-            y = c.bottom - bounds.top,
-            dx = index === 1 ? -17 : 17;
-          d = `M ${x} ${y} C ${x} ${y + 24} ${x + dx} ${y + 29} ${x + dx} ${y + 53}`;
+          const art = scene
+            .querySelector<HTMLElement>(".mobile-roadmap-art")
+            ?.getBoundingClientRect();
+          const x =
+            c.left + c.width * (index === 1 ? 0.69 : 0.255) - bounds.left;
+          const y = c.bottom - bounds.top;
+          const x2 =
+            art && art.width
+              ? art.left + art.width * (index === 1 ? 0.455 : 0.4) - bounds.left
+              : x;
+          const y2 = art && art.height ? art.top - bounds.top + 20 : y + 53;
+          d = `M ${x} ${y} C ${x} ${y + 24} ${x2} ${y2 - 10} ${x2} ${y2}`;
         }
         paths[index]?.setAttribute("d", d);
         if (index === 2)

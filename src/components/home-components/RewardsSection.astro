@@ -82,7 +82,7 @@ const stepImageSizes = [
     </header>
 
     <div
-      class="relative mx-auto grid grid-cols-1 items-center gap-6 [direction:ltr] sm:grid-cols-2 lg:grid-cols-[400px_430px_400px] lg:gap-[45px]"
+      class="rewards-layout relative mx-auto grid grid-cols-1 items-center gap-6 [direction:ltr] sm:grid-cols-2 lg:grid-cols-[400px_430px_400px] lg:gap-[45px]"
     >
       <svg
         class="pointer-events-none absolute inset-0 z-0 hidden h-full w-full lg:block"
@@ -108,7 +108,7 @@ const stepImageSizes = [
         sideCards.map((card, index) => (
           <>
             {index === 1 && (
-              <div class="relative z-10 order-3 flex min-h-[460px] flex-col items-center justify-center sm:col-span-2 lg:order-2 lg:col-span-1">
+              <div class="rewards-points relative z-10 order-3 flex min-h-[460px] flex-col items-center justify-center sm:col-span-2 lg:order-2 lg:col-span-1">
                 <div class="relative flex h-[370px] w-full items-center justify-center">
                   <span class="absolute top-0 z-20 size-32 overflow-hidden rounded-full border-4 border-[#f7f7ff] shadow-[0_12px_28px_-12px_rgba(89,76,227,.5)]">
                     <img
@@ -204,17 +204,14 @@ const stepImageSizes = [
     </div>
 
     <div
-      class="relative mx-auto mt-12 grid min-h-[140px] max-w-[1320px] grid-cols-2 items-center rounded-3xl border border-[#dfdcfa] bg-[#f5f3ff] px-5 sm:grid-cols-4"
+      class="rewards-steps relative mx-auto mt-12 grid min-h-[140px] max-w-[1320px] grid-cols-2 items-center rounded-3xl border border-[#dfdcfa] bg-[#f5f3ff] px-5 sm:grid-cols-4"
     >
       {
         t.steps.map((step, index) => (
           <div class="flex items-center justify-center gap-4 px-3 py-5">
             <span class="flex size-[86px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#eceaff]">
               <img
-                class:list={[
-                  "object-contain",
-                  stepImageSizes[index],
-                ]}
+                class:list={["object-contain", stepImageSizes[index]]}
                 src={stepImages[index]}
                 width="56"
                 height="56"

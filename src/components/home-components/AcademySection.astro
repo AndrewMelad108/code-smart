@@ -14,7 +14,7 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
 >
   <div class="mx-auto w-[calc(100%-32px)] sm:w-[calc(100%-60px)]">
     <div
-      class="grid grid-cols-1 items-center gap-14 lg:grid-cols-[minmax(0,650px)_minmax(0,1fr)] lg:items-start lg:gap-[62px] ltr:[direction:rtl] rtl:[direction:ltr]"
+      class="academy-layout grid grid-cols-1 items-center gap-14 lg:grid-cols-[minmax(0,650px)_minmax(0,1fr)] lg:items-start lg:gap-[62px] ltr:[direction:rtl] rtl:[direction:ltr]"
     >
       <figure
         class="relative m-0 mx-auto w-full max-w-[650px] pb-12 lg:mt-1 lg:pb-0"
@@ -50,7 +50,9 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
         </figcaption>
       </figure>
 
-      <div class="text-center ltr:[direction:ltr] rtl:[direction:rtl]">
+      <div
+        class="academy-copy text-center ltr:[direction:ltr] rtl:[direction:rtl]"
+      >
         <p class="text-[9px] font-extrabold tracking-[.3em] text-[#9ba4c5]">
           {t.eyebrow}
         </p>
@@ -76,7 +78,7 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
           {t.description.map((line) => <span class="block">{line}</span>)}
         </p>
 
-        <div class="mt-16 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div class="academy-values mt-16 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {
             t.values.map((value) => (
               <article class="flex min-h-[200px] items-center gap-4 rounded-[18px] bg-white px-5 py-5 text-start shadow-[0_14px_40px_-26px_rgba(49,32,89,.24)] sm:block sm:text-center">
@@ -102,7 +104,7 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
         </div>
 
         <div
-          class="relative mt-14 flex justify-center ltr:lg:ps-[75px] rtl:lg:pe-[75px]"
+          class="academy-action relative mt-14 flex justify-center ltr:lg:ps-[75px] rtl:lg:pe-[75px]"
         >
           <a
             class="inline-flex min-h-16 items-center justify-center gap-2.5 rounded-[10px] bg-brand-gradient px-7 py-3 text-[13px] font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"

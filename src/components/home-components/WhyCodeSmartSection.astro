@@ -10,6 +10,7 @@ const cardImages = [
   "/task-clipboard.png",
   "/graduation-cap.png",
 ];
+const mobileIcons = ["🚀", "</>", "🗺️", "🎮"];
 const cardAccents = [
   "text-[#ff7b2f]",
   "text-[#4f7cff]",
@@ -79,10 +80,10 @@ const cardPositions = ["lg:mt-20", "lg:mt-32", "lg:mt-28", "lg:mt-20"];
     <img
       src="/ai-assistant-robot.png"
       alt="assistant robot"
-      class="mx-auto block h-39 w-33.5 lg:hidden"
+      class="why-robot mx-auto block h-39 w-33.5 lg:hidden"
     />
     <div
-      class="relative z-10 mx-auto grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-15"
+      class="why-cards relative z-10 mx-auto grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-15"
     >
       {
         t.cards.map((card, index) => (
@@ -100,13 +101,16 @@ const cardPositions = ["lg:mt-20", "lg:mt-32", "lg:mt-28", "lg:mt-20"];
               ]}
             >
               <img
-                class="max-h-9 w-auto object-contain"
+                class="why-desktop-icon max-h-9 w-auto object-contain"
                 src={cardImages[index]}
                 width="56"
                 height="56"
                 alt=""
                 aria-hidden="true"
               />
+              <span class="why-mobile-icon" aria-hidden="true">
+                {mobileIcons[index]}
+              </span>
             </span>
             <>
               <small
@@ -134,7 +138,7 @@ const cardPositions = ["lg:mt-20", "lg:mt-32", "lg:mt-28", "lg:mt-20"];
         <img src="/code-smart-robot.png" width="160" height="192" alt="" />
       </div>
     </div>
-    <div class="mx-auto mt-14 flex flex-col items-center">
+    <div class="why-footer mx-auto mt-14 flex flex-col items-center">
       <div
         class="flex h-1.5 items-center justify-center gap-2"
         aria-hidden="true"

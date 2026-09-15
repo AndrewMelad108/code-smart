@@ -14,9 +14,9 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
   aria-labelledby="hero-title"
 >
   <div
-    class="relative z-10 grid grid-cols-1 items-center gap-8 text-center lg:grid-cols-[563px_minmax(0,654px)] lg:justify-between lg:gap-10 lg:ps-15 lg:text-start"
+    class="hero-layout relative z-10 grid grid-cols-1 items-center gap-8 text-center lg:grid-cols-[563px_minmax(0,654px)] lg:justify-between lg:gap-10 lg:ps-15 lg:text-start"
   >
-    <div class="order-2 mx-auto max-w-[563px] lg:order-1 lg:mx-0">
+    <div class="hero-copy order-2 mx-auto max-w-[563px] lg:order-1 lg:mx-0">
       <img
         src="/assistant-robot.png"
         alt="assistant robot"
@@ -31,8 +31,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
           lang === "ar" ? (
             <span class="whitespace-nowrap">
               <span class="text-green">
-                {" "}
-                <span class="text-black">و </span>نصنع{" "}
+                <span class="text-black">و</span>نصنع{" "}
               </span>
               <span class="text-brand">جيل المستقبل</span>
             </span>
@@ -47,7 +46,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
         {t.description}
       </p>
       <div
-        class="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start lg:gap-10"
+        class="hero-actions mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start lg:gap-10"
       >
         <a
           class="inline-flex h-[52px] w-[188px] max-w-full items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-6 py-3 text-xs font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
@@ -62,7 +61,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
     </div>
 
     <div
-      class="relative order-1 mx-auto w-full max-w-[654px] md:max-w-[654px] lg:order-2"
+      class="hero-image relative order-1 mx-auto w-full max-w-[654px] md:max-w-[654px] lg:order-2"
     >
       <img
         class="relative z-10 w-full object-contain"
@@ -76,9 +75,9 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
   </div>
 
   <div
-    class="relative z-20 mx-auto mt-5 grid w-[calc(100%-20px)] grid-cols-1 items-center rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:px-10 md:py-6 lg:w-[calc(100%-60px)] lg:grid-cols-[364px_1fr]"
+    class="hero-progress relative z-20 mx-auto mt-5 grid w-[calc(100%-20px)] grid-cols-1 items-center rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:px-10 md:py-6 lg:w-[calc(100%-60px)] lg:grid-cols-[364px_1fr]"
   >
-    <div class="flex justify-center lg:justify-start">
+    <div class="progress-heading flex justify-center lg:justify-start">
       <div>
         <b class="block text-[40px] font-black text-ink">{t.experience}</b
         ><strong class="mt-0.5 block text-[32px] font-black text-green"
@@ -93,7 +92,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
       />
     </div>
 
-    <div class="relative hidden sm:block">
+    <div class="progress-image relative hidden sm:block">
       <span
         class="absolute inset-x-[5%] top-[32%] z-0 h-1 rounded-full bg-[linear-gradient(90deg,#05df72_0%,#a3b3ff_50%,#e5e7eb_100%)]"
         aria-hidden="true"></span>
@@ -108,7 +107,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
     </div>
 
     <ol
-      class="relative m-0 grid list-none grid-cols-2 gap-x-2 gap-y-5 p-0 sm:hidden"
+      class="progress-stages relative m-0 grid list-none grid-cols-2 gap-x-2 gap-y-5 p-0 sm:hidden"
     >
       {
         t.stages.map((stage, index) => (
