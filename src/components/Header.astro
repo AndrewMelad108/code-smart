@@ -1,6 +1,6 @@
 ---
-import { Menu } from "@lucide/astro";
-import { LOGIN_URL, SIGNUP_URL } from "@/constants";
+import { Menu, User } from "@lucide/astro";
+import { SIGNUP_URL } from "@/constants";
 import { getLangFromUrl, localizePath, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -19,11 +19,12 @@ const links = [
   class="site-header sticky top-0 z-50 bg-white font-header shadow-header"
 >
   <div
-    class="mx-auto flex h-[92px] w-[calc(100%-60px)] items-start justify-between min-[1200px]:w-[calc(100%-120px)]"
+    class="mx-auto flex h-23 items-center gap-6.5 lg:w-[calc(100%-60px)] lg:justify-between lg:gap-0"
   >
+    <!-- Logo -->
     <a
       href={localizePath("/", lang)}
-      class="mt-3 h-[68px] w-[78px] shrink-0 overflow-hidden"
+      class="mt-3 h-auto w-11 shrink-0 overflow-hidden object-contain lg:w-19.5"
       aria-label="Code Smart Academy"
     >
       <img
@@ -33,7 +34,8 @@ const links = [
       />
     </a>
 
-    <div class="mt-[26px] hidden items-start gap-8 min-[1180px]:flex">
+    <!-- Navigation -->
+    <div class="mt-6.5 hidden items-center gap-8 min-[1280px]:flex">
       <nav
         class="flex items-start justify-center gap-8 text-lg leading-5 font-semibold text-navy"
         aria-label={t.menu}
@@ -50,28 +52,32 @@ const links = [
           ))
         }
       </nav>
+    </div>
 
+    <!-- Actions -->
+    <a
+      class="hidden h-10 min-w-[159px] items-center justify-center gap-3 rounded-xl bg-brand-gradient px-5 text-base leading-5 font-bold text-white shadow-button transition-transform hover:-translate-y-0.5 lg:inline-flex"
+      href={SIGNUP_URL ?? "#future"}>{t.signup}</a
+    >
+
+    <!-- Mobile Actions -->
+    <div class="flex items-center gap-1 lg:hidden lg:gap-3">
       <a
-        class="inline-flex h-10 min-w-[159px] items-center justify-center rounded-xl bg-brand-gradient px-5 text-base leading-5 font-bold text-white shadow-button transition-transform hover:-translate-y-0.5"
+        class="rounded-xl border border-[#94A3B8] bg-linear-to-r from-[#594CF3] to-[#1600FF] px-3 py-1 text-[11px] text-white lg:text-base"
         href={SIGNUP_URL ?? "#future"}>{t.signup}</a
       >
+      <button
+        class="flex items-center gap-1.5 rounded-xl border border-[#94A3B8] px-3 py-1 text-[11px] text-[#94A3B8]"
+      >
+        {t.login}
+        <User size={14} aria-hidden="true" />
+      </button>
     </div>
 
-    <div class="mobile-header-actions">
-      {
-        LOGIN_URL ? (
-          <a href={LOGIN_URL}>{t.login}</a>
-        ) : (
-          <button type="button" disabled aria-label={t.unavailable}>
-            {t.login}
-          </button>
-        )
-      }
-      <a href={SIGNUP_URL ?? "#future"}>{t.signup}</a>
-    </div>
-    <div class="header-controls flex items-start gap-3">
+    <!-- Mobile Navigation -->
+    <div class="header-controls ms-auto flex w-fit items-start gap-3 lg:ms-0">
       <button
-        class="menu-toggle mt-5 inline-flex size-11 items-center justify-center rounded-xl border border-line text-brand min-[1180px]:hidden"
+        class="menu-toggle mt-5 inline-flex size-11 items-center justify-center rounded-xl border border-line text-brand min-[1180px]:hidden lg:hidden"
         type="button"
         aria-controls="mobile-navigation"
         aria-expanded="false"
@@ -83,7 +89,7 @@ const links = [
       </button>
 
       <a
-        class="relative top-0 z-10 inline-flex h-[70px] w-[57px] items-center justify-center rounded-b-[20px] bg-green px-4 pt-2 text-xl leading-none font-bold text-white"
+        class="absolute inset-e-10 top-0 z-10 inline-flex h-17.5 w-14.25 items-center justify-center rounded-b-[20px] bg-green px-4 pt-2 text-xl leading-none font-bold text-white"
         data-language-switch
         href={localizePath(Astro.url.pathname, lang === "ar" ? "en" : "ar")}
         aria-label={t.languageLabel}

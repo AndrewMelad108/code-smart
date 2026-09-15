@@ -4,6 +4,7 @@ import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang)("rewards");
+
 const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
 
 const rewardCard = {
@@ -11,42 +12,47 @@ const rewardCard = {
   type: "reward",
   accent: "green",
 };
+
 const taskCard = {
   ...t.cards[0],
   type: "task",
   accent: "purple",
 };
+
 const sideCards =
   lang === "ar" ? [rewardCard, taskCard] : [taskCard, rewardCard];
+
 const stepImages = [
   "/graduation-cap.png",
   "/reward-gift.png",
-  "/points-badge.jpg",
+  "/reward-points-trophy.png",
   "/reward-ticket.png",
 ];
+
 const stepImageSizes = [
-  "h-[39px] w-[46px]",
-  "h-10 w-[41px]",
-  "h-[54px] w-[49px] rounded-full",
-  "h-[43px] w-14",
+  "h-[28px] w-[33px] min-[768px]:h-[34px] min-[768px]:w-[40px] xl:h-[39px] xl:w-[46px]",
+  "h-[29px] w-[30px] min-[768px]:h-[35px] min-[768px]:w-[36px] xl:h-10 xl:w-[41px]",
+  "h-[38px] w-[35px] rounded-full min-[768px]:h-[44px] min-[768px]:w-[40px] xl:h-[54px] xl:w-[49px]",
+  "h-[31px] w-[40px] min-[768px]:h-[37px] min-[768px]:w-[48px] xl:h-[43px] xl:w-14",
 ];
 ---
 
 <section
   id="rewards"
-  class="relative overflow-hidden bg-[#f7f7ff] py-24 md:py-28 lg:min-h-[1163px]"
+  class="relative overflow-hidden bg-[#f7f7ff] py-12 min-[768px]:min-h-[1383px] min-[768px]:py-[70px] min-[1024px]:min-h-[1250px] min-[1024px]:py-[64px] min-[1400px]:min-h-[1163px] min-[1400px]:py-[96px] sm:py-16 xl:min-h-[1000px] xl:py-[60px]"
   aria-labelledby="rewards-title"
 >
   <img
-    class="pointer-events-none absolute top-20 hidden w-28 lg:block ltr:right-[7%] rtl:left-[7%]"
+    class="pointer-events-none absolute top-20 hidden w-28 xl:block ltr:right-[7%] rtl:left-[7%]"
     src="/reward-coin.png"
     width="265"
     height="316"
     alt=""
     aria-hidden="true"
   />
+
   <img
-    class="pointer-events-none absolute top-20 hidden w-28 lg:block ltr:left-[7%] rtl:right-[7%]"
+    class="pointer-events-none absolute top-20 hidden w-28 xl:block ltr:left-[7%] rtl:right-[7%]"
     src="/reward-ticket-alt.png"
     width="292"
     height="264"
@@ -54,162 +60,549 @@ const stepImageSizes = [
     aria-hidden="true"
   />
 
+  <!-- Bottom tiny decorations -->
+
   <span
     class="pointer-events-none absolute bottom-10 left-[9%] size-2 rotate-45 bg-[#d8c9ff]"
     aria-hidden="true"></span>
+
   <span
     class="pointer-events-none absolute right-[12%] bottom-8 size-1.5 rotate-45 bg-[#c9d1ff]"
     aria-hidden="true"></span>
 
-  <div class="mx-auto w-[calc(100%-40px)] max-w-[1320px]">
-    <header class="mx-auto mb-12 max-w-[760px] text-center">
+  <!-- ====================================================== -->
+  <!-- MAIN CONTAINER -->
+  <!-- ====================================================== -->
+
+  <div
+    class="mx-auto w-[calc(100%-32px)] min-[768px]:w-[calc(100%-68px)] min-[1024px]:w-[880px] min-[1400px]:max-w-[1320px] sm:w-[calc(100%-40px)] xl:w-[calc(100%-80px)] xl:max-w-[1200px]"
+  >
+    <!-- ==================================================== -->
+    <!-- HEADER -->
+    <!-- ==================================================== -->
+
+    <header
+      class="mx-auto mb-9 max-w-[760px] text-center min-[768px]:mb-[60px] min-[1024px]:mb-[48px] xl:mb-12"
+    >
       <span
-        class="mb-3 block text-[9px] font-extrabold tracking-[.32em] text-[#9da7c7] uppercase"
-        >{t.eyebrow}</span
+        class="mb-3 block text-[28px] font-extrabold tracking-[.32em] text-[#9da7c7] uppercase min-[768px]:text-[10px] lg:text-4xl xl:text-[11px]"
       >
+        {t.eyebrow}
+      </span>
+
       <h2
         id="rewards-title"
-        class="text-[32px] leading-[1.35] font-black text-[#172852] sm:text-[40px]"
+        class="text-[28px] leading-[1.35] font-black text-[#172852] min-[768px]:text-[36px] min-[1024px]:text-[36px] sm:text-[32px] xl:text-[36px]"
       >
         {t.title}
       </h2>
+
       <span
         class="mx-auto mt-3 block h-0.5 w-12 rounded-full bg-[#5b62ed]"
         aria-hidden="true"></span>
-      <p class="mx-auto mt-5 text-xs leading-7 text-muted lg:text-sm">
+
+      <p
+        class="mx-auto mt-5 text-[12px] leading-6 text-muted min-[768px]:max-w-[620px] min-[768px]:text-[13px] min-[768px]:leading-7 xl:text-sm"
+      >
         {t.description}
       </p>
     </header>
 
+    <!-- ==================================================== -->
+    <!-- REWARDS MAIN LAYOUT -->
+    <!--
+      Mobile / Tablet / 1024:
+            CHEST
+          CARD CARD
+
+      >=1280:
+        CARD CHEST CARD
+    -->
+    <!-- ==================================================== -->
+
     <div
-      class="rewards-layout relative mx-auto grid grid-cols-1 items-center gap-6 [direction:ltr] sm:grid-cols-2 lg:grid-cols-[400px_430px_400px] lg:gap-[45px]"
+      class="rewards-layout relative mx-auto grid grid-cols-2 items-start gap-x-3 gap-y-4 [direction:ltr] min-[768px]:gap-x-[60px] min-[768px]:gap-y-[28px] min-[1024px]:gap-x-[64px] min-[1024px]:gap-y-[30px] min-[1400px]:grid-cols-[400px_430px_400px] min-[1400px]:gap-x-[45px] sm:gap-x-5 xl:grid-cols-[320px_1fr_320px] xl:items-center xl:gap-x-[30px] xl:gap-y-0"
     >
+      <!-- ================================================== -->
+      <!-- MOBILE ARROWS < 768 -->
+      <!-- ================================================== -->
+
       <svg
-        class="pointer-events-none absolute inset-0 z-0 hidden h-full w-full lg:block"
-        viewBox="0 0 1320 460"
+        class="pointer-events-none absolute top-[52px] left-1/2 z-0 block h-[155px] w-[330px] -translate-x-1/2 overflow-visible min-[768px]:hidden"
+        viewBox="0 0 330 155"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <marker
+            id="reward-green-arrow-mobile"
+            markerWidth="7"
+            markerHeight="7"
+            refX="5.8"
+            refY="3.5"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0 0L7 3.5L0 7Z" fill="#42CDB5"></path>
+          </marker>
+
+          <marker
+            id="reward-purple-arrow-mobile"
+            markerWidth="7"
+            markerHeight="7"
+            refX="5.8"
+            refY="3.5"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0 0L7 3.5L0 7Z" fill="#6A65F5"></path>
+          </marker>
+        </defs>
+
+        <!-- LEFT -->
+
+        <path
+          d="
+            M 143 18
+
+            C 119 25,
+              91 42,
+              66 68
+
+            C 45 90,
+              31 112,
+              24 139
+          "
+          fill="none"
+          stroke={lang === "ar" ? "#42CDB5" : "#6A65F5"}
+          stroke-width="1.764"
+          stroke-dasharray="6.036 4.643"
+          stroke-linecap="round"
+          opacity="0.82"
+          marker-end={lang === "ar"
+            ? "url(#reward-green-arrow-mobile)"
+            : "url(#reward-purple-arrow-mobile)"}></path>
+
+        <!-- RIGHT -->
+
+        <path
+          d="
+            M 187 18
+
+            C 211 25,
+              239 42,
+              264 68
+
+            C 285 90,
+              299 112,
+              306 139
+          "
+          fill="none"
+          stroke={lang === "ar" ? "#6A65F5" : "#42CDB5"}
+          stroke-width="1.764"
+          stroke-dasharray="6.036 4.643"
+          stroke-linecap="round"
+          opacity="0.82"
+          marker-end={lang === "ar"
+            ? "url(#reward-purple-arrow-mobile)"
+            : "url(#reward-green-arrow-mobile)"}></path>
+      </svg>
+
+      <!-- ================================================== -->
+      <!-- TABLET + 1024 ARROWS -->
+      <!-- 768 <= width < 1280 -->
+      <!-- ================================================== -->
+
+      <svg
+        class="pointer-events-none absolute left-1/2 z-0 hidden -translate-x-1/2 overflow-visible min-[768px]:top-[64px] min-[768px]:block min-[768px]:h-[250px] min-[768px]:w-[640px] min-[1024px]:top-[62px] min-[1024px]:h-[230px] min-[1024px]:w-[760px] xl:hidden"
+        viewBox="0 0 760 230"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <marker
+            id="reward-green-arrow-tablet"
+            markerWidth="8"
+            markerHeight="8"
+            refX="6.5"
+            refY="4"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0 0L8 4L0 8Z" fill="#42CDB5"></path>
+          </marker>
+
+          <marker
+            id="reward-purple-arrow-tablet"
+            markerWidth="8"
+            markerHeight="8"
+            refX="6.5"
+            refY="4"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0 0L8 4L0 8Z" fill="#6A65F5"></path>
+          </marker>
+        </defs>
+
+        <!-- LEFT -->
+
+        <path
+          d="
+            M 342 28
+
+            C 295 32,
+              245 57,
+              195 92
+
+            C 145 127,
+              108 165,
+              82 210
+          "
+          fill="none"
+          stroke={lang === "ar" ? "#42CDB5" : "#6A65F5"}
+          stroke-width="1.764"
+          stroke-dasharray="6.036 4.643"
+          stroke-linecap="round"
+          opacity="0.82"
+          marker-end={lang === "ar"
+            ? "url(#reward-green-arrow-tablet)"
+            : "url(#reward-purple-arrow-tablet)"}></path>
+
+        <!-- RIGHT -->
+
+        <path
+          d="
+            M 418 28
+
+            C 465 32,
+              515 57,
+              565 92
+
+            C 615 127,
+              652 165,
+              678 210
+          "
+          fill="none"
+          stroke={lang === "ar" ? "#6A65F5" : "#42CDB5"}
+          stroke-width="1.764"
+          stroke-dasharray="6.036 4.643"
+          stroke-linecap="round"
+          opacity="0.82"
+          marker-end={lang === "ar"
+            ? "url(#reward-purple-arrow-tablet)"
+            : "url(#reward-green-arrow-tablet)"}></path>
+      </svg>
+
+      <!-- ================================================== -->
+      <!-- DESKTOP ARROWS >=1280 -->
+      <!-- ================================================== -->
+
+      <svg
+        class="pointer-events-none absolute top-0 left-0 z-0 hidden h-[300px] w-full overflow-visible xl:block"
+        viewBox="0 0 1200 300"
+        fill="none"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
+        <defs>
+          <marker
+            id="reward-green-arrow-desktop"
+            markerWidth="9"
+            markerHeight="9"
+            refX="7"
+            refY="4.5"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0 0L9 4.5L0 9Z" fill="#28B396"></path>
+          </marker>
+
+          <marker
+            id="reward-purple-arrow-desktop"
+            markerWidth="9"
+            markerHeight="9"
+            refX="7"
+            refY="4.5"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0 0L9 4.5L0 9Z" fill="#6A65F5"></path>
+          </marker>
+        </defs>
+
+        <!-- LEFT -->
+
         <path
-          d="M 620 72 C 535 78 500 195 390 214"
+          d="
+            M 555 58
+
+            C 515 64,
+              480 88,
+              452 120
+
+            C 420 158,
+              390 188,
+              348 206
+          "
           fill="none"
-          stroke={lang === "ar" ? "#3dcfd2" : "#7367ef"}
-          stroke-width="2"
-          stroke-dasharray="6 7"></path>
+          stroke={lang === "ar" ? "#28B396" : "#6A65F5"}
+          stroke-width="1.764"
+          stroke-dasharray="6.036 4.643"
+          stroke-linecap="round"
+          opacity="0.82"
+          marker-end={lang === "ar"
+            ? "url(#reward-green-arrow-desktop)"
+            : "url(#reward-purple-arrow-desktop)"}></path>
+
+        <!-- RIGHT -->
+
         <path
-          d="M 700 72 C 785 78 820 195 930 214"
+          d="
+            M 645 58
+
+            C 685 64,
+              720 88,
+              748 120
+
+            C 780 158,
+              810 188,
+              852 206
+          "
           fill="none"
-          stroke={lang === "ar" ? "#7367ef" : "#3dcfd2"}
-          stroke-width="2"
-          stroke-dasharray="6 7"></path>
+          stroke={lang === "ar" ? "#6A65F5" : "#28B396"}
+          stroke-width="1.764"
+          stroke-dasharray="6.036 4.643"
+          stroke-linecap="round"
+          opacity="0.82"
+          marker-end={lang === "ar"
+            ? "url(#reward-purple-arrow-desktop)"
+            : "url(#reward-green-arrow-desktop)"}></path>
       </svg>
 
-      {
-        sideCards.map((card, index) => (
-          <>
-            {index === 1 && (
-              <div class="rewards-points relative z-10 order-3 flex min-h-[460px] flex-col items-center justify-center sm:col-span-2 lg:order-2 lg:col-span-1">
-                <div class="relative flex h-[370px] w-full items-center justify-center">
-                  <span class="absolute top-0 z-20 size-32 overflow-hidden rounded-full border-4 border-[#f7f7ff] shadow-[0_12px_28px_-12px_rgba(89,76,227,.5)]">
-                    <img
-                      class="size-full scale-[1.48] object-cover"
-                      src="/points-badge.jpg"
-                      width="416"
-                      height="416"
-                      alt={t.points}
-                    />
-                  </span>
-                  <img
-                    class="relative z-10 mt-20 w-[340px] -translate-y-8 object-contain"
-                    src="/rewards-chest.png"
-                    width="606"
-                    height="602"
-                    alt=""
-                    aria-hidden="true"
-                  />
-                </div>
-                <strong class="-mt-2 rounded-full bg-[#eceaff] px-5 py-2 text-sm font-bold text-[#5b55e7]">
-                  {t.pointsCta}
-                </strong>
-              </div>
-            )}
+      <!-- ================================================== -->
+      <!-- FIRST SIDE CARD -->
+      <!-- ================================================== -->
 
-            <article
-              class:list={[
-                "relative z-10 flex min-h-[460px] flex-col items-center rounded-3xl border border-[#e8e8f5] bg-white px-8 py-8 text-center shadow-[0_14px_36px_-28px_rgba(42,48,99,.32)]",
-                index === 0 ? "order-1" : "order-2 lg:order-3",
-              ]}
-              dir={lang === "ar" ? "rtl" : "ltr"}
-            >
-              {card.type === "reward" ? (
-                <div class="relative mb-3 h-[205px] w-[245px]">
-                  <img
-                    class="mx-auto h-[185px] object-contain"
-                    src={card.image}
-                    width="283"
-                    height="318"
-                    alt=""
-                    aria-hidden="true"
-                  />
-                  <span class="absolute right-0 bottom-2 flex size-20 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#7662f1,#5144d8)] text-[36px] font-black text-white shadow-lg">
-                    %
-                  </span>
-                  <span class="absolute bottom-4 left-1 flex size-11 items-center justify-center rounded-full bg-[#1bc879] text-white shadow-md">
-                    <Star size={23} fill="currentColor" aria-hidden="true" />
-                  </span>
-                  <Sparkles
-                    class="absolute top-5 right-2 text-[#6c63ee]"
-                    size={22}
-                    aria-hidden="true"
-                  />
-                </div>
-              ) : (
-                <img
-                  class="mb-3 h-[205px] w-[220px] object-contain"
-                  src={card.image}
-                  width="466"
-                  height="508"
-                  alt=""
+      <article
+        class="relative z-10 order-2 flex min-h-[158px] flex-col items-center rounded-[16px] border border-[#e8e8f5] bg-white px-3 py-4 text-center shadow-[0_14px_36px_-28px_rgba(42,48,99,.32)] min-[768px]:min-h-[420px] min-[768px]:rounded-[24px] min-[768px]:px-7 min-[768px]:py-7 min-[1024px]:min-h-[420px] min-[1024px]:px-8 min-[1024px]:py-8 min-[1400px]:min-h-[460px] min-[1400px]:rounded-3xl sm:min-h-[220px] sm:px-5 sm:py-6 xl:order-1 xl:min-h-[420px]"
+        dir={lang === "ar" ? "rtl" : "ltr"}
+      >
+        {
+          sideCards[0].type === "reward" ? (
+            <div class="relative mb-1 h-[76px] w-[110px] min-[768px]:mb-3 min-[768px]:h-[190px] min-[768px]:w-[225px] min-[1024px]:h-[195px] min-[1024px]:w-[235px] min-[1400px]:h-[205px] min-[1400px]:w-[245px] sm:h-[110px] sm:w-[145px] xl:h-[185px] xl:w-[225px]">
+              <img
+                class="mx-auto h-[72px] object-contain min-[768px]:h-[170px] min-[1024px]:h-[175px] min-[1400px]:h-[185px] sm:h-[105px] xl:h-[165px]"
+                src={sideCards[0].image}
+                width="283"
+                height="318"
+                alt=""
+                aria-hidden="true"
+              />
+
+              <span class="absolute right-0 bottom-1 flex size-8 items-center justify-center rounded-lg bg-[linear-gradient(145deg,#7662f1,#5144d8)] text-[15px] font-black text-white shadow-lg min-[768px]:bottom-2 min-[768px]:size-[68px] min-[768px]:rounded-2xl min-[768px]:text-[30px] min-[1400px]:size-20 min-[1400px]:text-[36px] sm:size-11 sm:text-xl">
+                %
+              </span>
+
+              <span class="absolute bottom-2 left-0 flex size-5 items-center justify-center rounded-full bg-[#1bc879] text-white shadow-md min-[768px]:bottom-4 min-[768px]:left-1 min-[768px]:size-10 min-[1400px]:size-11 sm:size-7">
+                <Star
+                  class="size-3 min-[768px]:size-[21px] min-[1400px]:size-[23px] sm:size-4"
+                  fill="currentColor"
                   aria-hidden="true"
                 />
-              )}
+              </span>
 
-              <h3 class="mt-2 text-[30px] leading-10 font-black text-[#111c3d]">
-                {card.title}
-              </h3>
-              <p class="mt-2 max-w-[300px] text-sm leading-7 text-muted">
-                {card.description}
-              </p>
-              <div
-                class="mt-auto flex items-center justify-center gap-2"
+              <Sparkles
+                class="absolute top-1 right-1 size-3 text-[#6c63ee] min-[768px]:top-5 min-[768px]:right-2 min-[768px]:size-[21px] min-[1400px]:size-[22px] sm:size-4"
                 aria-hidden="true"
-              >
-                {Array.from({ length: 7 }).map((_, dotIndex) => (
-                  <span
-                    class:list={[
-                      "size-3 rounded-full",
-                      dotIndex < 3
-                        ? card.accent === "green"
-                          ? "bg-[#28c875]"
-                          : "bg-[#6d63ed]"
-                        : "bg-[#d8d8d8]",
-                    ]}
-                  />
-                ))}
-              </div>
-            </article>
-          </>
-        ))
-      }
+              />
+            </div>
+          ) : (
+            <img
+              class="mb-1 h-[76px] w-[100px] object-contain min-[768px]:mb-3 min-[768px]:h-[190px] min-[768px]:w-[205px] min-[1024px]:h-[195px] min-[1024px]:w-[215px] min-[1400px]:h-[205px] min-[1400px]:w-[220px] sm:h-[110px] sm:w-[140px] xl:h-[185px] xl:w-[205px]"
+              src={sideCards[0].image}
+              width="466"
+              height="508"
+              alt=""
+              aria-hidden="true"
+            />
+          )
+        }
+
+        <h3
+          class="mt-1 text-[15px] leading-6 font-black text-[#111c3d] min-[768px]:mt-2 min-[768px]:text-[26px] min-[768px]:leading-9 min-[1024px]:text-[28px] min-[1400px]:text-[30px] min-[1400px]:leading-10 sm:text-xl"
+        >
+          {sideCards[0].title}
+        </h3>
+
+        <p
+          class="mt-1 max-w-[130px] text-[9px] leading-[17px] text-muted min-[768px]:mt-2 min-[768px]:max-w-[270px] min-[768px]:text-[13px] min-[768px]:leading-6 min-[1024px]:max-w-[290px] min-[1024px]:text-sm min-[1024px]:leading-7 min-[1400px]:max-w-[300px] sm:max-w-[190px] sm:text-[11px] sm:leading-5"
+        >
+          {sideCards[0].description}
+        </p>
+
+        <div
+          class="mt-auto flex items-center justify-center gap-1 min-[768px]:gap-[7px] xl:gap-2"
+          aria-hidden="true"
+        >
+          {
+            Array.from({ length: 7 }).map((_, dotIndex) => (
+              <span
+                class:list={[
+                  `size-[7px] rounded-full min-[768px]:size-[10px] xl:size-3`,
+                  dotIndex < 3
+                    ? sideCards[0].accent === "green"
+                      ? "bg-[#28c875]"
+                      : "bg-[#6d63ed]"
+                    : "bg-[#d8d8d8]",
+                ]}
+              />
+            ))
+          }
+        </div>
+      </article>
+
+      <!-- ================================================== -->
+      <!-- CENTER POINTS -->
+      <!-- ================================================== -->
+
+      <div
+        class="rewards-points relative z-10 order-1 col-span-2 flex min-h-[190px] flex-col items-center justify-start min-[768px]:min-h-[315px] min-[1024px]:min-h-[300px] min-[1400px]:min-h-[460px] sm:min-h-[250px] xl:order-2 xl:col-span-1 xl:min-h-[420px] xl:justify-center"
+      >
+        <div
+          class="relative flex h-[155px] w-full items-center justify-center min-[768px]:h-[245px] min-[1024px]:h-[235px] min-[1400px]:h-[370px] sm:h-[205px] xl:h-[330px]"
+        >
+          <!-- Points circle -->
+
+          <span
+            class="absolute top-0 z-20 size-[66px] overflow-hidden rounded-full border-[3px] border-[#f7f7ff] shadow-[0_12px_28px_-12px_rgba(89,76,227,.5)] min-[768px]:size-[96px] min-[1024px]:size-[96px] min-[1400px]:size-32 sm:size-[84px] xl:size-[110px] xl:border-4"
+          >
+            <img
+              class="size-full scale-[1.48] object-cover"
+              src="/points-badge.jpg"
+              width="416"
+              height="416"
+              alt={t.points}
+            />
+          </span>
+
+          <!-- Chest -->
+
+          <img
+            class="relative z-10 mt-[58px] w-[135px] object-contain min-[768px]:mt-[76px] min-[768px]:w-[210px] min-[1024px]:mt-[72px] min-[1024px]:w-[220px] min-[1400px]:mt-20 min-[1400px]:w-[340px] min-[1400px]:-translate-y-8 sm:mt-[72px] sm:w-[185px] xl:mt-[70px] xl:w-[280px]"
+            src="/rewards-chest.png"
+            width="606"
+            height="602"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+
+        <strong
+          class="-mt-1 rounded-full bg-[#eceaff] px-4 py-1.5 text-[10px] font-bold text-[#5b55e7] min-[768px]:px-5 min-[768px]:py-2 min-[768px]:text-[13px] min-[1400px]:-mt-2 sm:text-xs xl:text-sm"
+        >
+          {t.pointsCta}
+        </strong>
+      </div>
+
+      <!-- ================================================== -->
+      <!-- SECOND SIDE CARD -->
+      <!-- ================================================== -->
+
+      <article
+        class="relative z-10 order-3 flex min-h-[158px] flex-col items-center rounded-[16px] border border-[#e8e8f5] bg-white px-3 py-4 text-center shadow-[0_14px_36px_-28px_rgba(42,48,99,.32)] min-[768px]:min-h-[420px] min-[768px]:rounded-[24px] min-[768px]:px-7 min-[768px]:py-7 min-[1024px]:min-h-[420px] min-[1024px]:px-8 min-[1024px]:py-8 min-[1400px]:min-h-[460px] min-[1400px]:rounded-3xl sm:min-h-[220px] sm:px-5 sm:py-6 xl:order-3 xl:min-h-[420px]"
+        dir={lang === "ar" ? "rtl" : "ltr"}
+      >
+        {
+          sideCards[1].type === "reward" ? (
+            <div class="relative mb-1 h-[76px] w-[110px] min-[768px]:mb-3 min-[768px]:h-[190px] min-[768px]:w-[225px] min-[1024px]:h-[195px] min-[1024px]:w-[235px] min-[1400px]:h-[205px] min-[1400px]:w-[245px] sm:h-[110px] sm:w-[145px] xl:h-[185px] xl:w-[225px]">
+              <img
+                class="mx-auto h-[72px] object-contain min-[768px]:h-[170px] min-[1024px]:h-[175px] min-[1400px]:h-[185px] sm:h-[105px] xl:h-[165px]"
+                src={sideCards[1].image}
+                width="283"
+                height="318"
+                alt=""
+                aria-hidden="true"
+              />
+
+              <span class="absolute right-0 bottom-1 flex size-8 items-center justify-center rounded-lg bg-[linear-gradient(145deg,#7662f1,#5144d8)] text-[15px] font-black text-white shadow-lg min-[768px]:bottom-2 min-[768px]:size-[68px] min-[768px]:rounded-2xl min-[768px]:text-[30px] min-[1400px]:size-20 min-[1400px]:text-[36px] sm:size-11 sm:text-xl">
+                %
+              </span>
+
+              <span class="absolute bottom-2 left-0 flex size-5 items-center justify-center rounded-full bg-[#1bc879] text-white shadow-md min-[768px]:bottom-4 min-[768px]:left-1 min-[768px]:size-10 min-[1400px]:size-11 sm:size-7">
+                <Star
+                  class="size-3 min-[768px]:size-[21px] min-[1400px]:size-[23px] sm:size-4"
+                  fill="currentColor"
+                  aria-hidden="true"
+                />
+              </span>
+
+              <Sparkles
+                class="absolute top-1 right-1 size-3 text-[#6c63ee] min-[768px]:top-5 min-[768px]:right-2 min-[768px]:size-[21px] min-[1400px]:size-[22px] sm:size-4"
+                aria-hidden="true"
+              />
+            </div>
+          ) : (
+            <img
+              class="mb-1 h-[76px] w-[100px] object-contain min-[768px]:mb-3 min-[768px]:h-[190px] min-[768px]:w-[205px] min-[1024px]:h-[195px] min-[1024px]:w-[215px] min-[1400px]:h-[205px] min-[1400px]:w-[220px] sm:h-[110px] sm:w-[140px] xl:h-[185px] xl:w-[205px]"
+              src={sideCards[1].image}
+              width="466"
+              height="508"
+              alt=""
+              aria-hidden="true"
+            />
+          )
+        }
+
+        <h3
+          class="mt-1 text-[15px] leading-6 font-black text-[#111c3d] min-[768px]:mt-2 min-[768px]:text-[26px] min-[768px]:leading-9 min-[1024px]:text-[28px] min-[1400px]:text-[30px] min-[1400px]:leading-10 sm:text-xl"
+        >
+          {sideCards[1].title}
+        </h3>
+
+        <p
+          class="mt-1 max-w-[130px] text-[9px] leading-[17px] text-muted min-[768px]:mt-2 min-[768px]:max-w-[270px] min-[768px]:text-[13px] min-[768px]:leading-6 min-[1024px]:max-w-[290px] min-[1024px]:text-sm min-[1024px]:leading-7 min-[1400px]:max-w-[300px] sm:max-w-[190px] sm:text-[11px] sm:leading-5"
+        >
+          {sideCards[1].description}
+        </p>
+
+        <div
+          class="mt-auto flex items-center justify-center gap-1 min-[768px]:gap-[7px] xl:gap-2"
+          aria-hidden="true"
+        >
+          {
+            Array.from({ length: 7 }).map((_, dotIndex) => (
+              <span
+                class:list={[
+                  `size-[7px] rounded-full min-[768px]:size-[10px] xl:size-3`,
+                  dotIndex < 3
+                    ? sideCards[1].accent === "green"
+                      ? "bg-[#28c875]"
+                      : "bg-[#6d63ed]"
+                    : "bg-[#d8d8d8]",
+                ]}
+              />
+            ))
+          }
+        </div>
+      </article>
     </div>
 
+    <!-- ==================================================== -->
+    <!-- STEPS -->
+    <!--
+      <1280 = 2 x 2
+      >=1280 = 4 columns
+    -->
+    <!-- ==================================================== -->
+
     <div
-      class="rewards-steps relative mx-auto mt-12 grid min-h-[140px] max-w-[1320px] grid-cols-2 items-center rounded-3xl border border-[#dfdcfa] bg-[#f5f3ff] px-5 sm:grid-cols-4"
+      class="rewards-steps relative mx-auto mt-8 grid grid-cols-2 gap-3 min-[768px]:mt-8 min-[768px]:gap-x-5 min-[768px]:gap-y-4 min-[1024px]:mt-10 min-[1024px]:gap-x-6 min-[1024px]:gap-y-4 min-[1400px]:mt-12 xl:mt-10 xl:min-h-[140px] xl:grid-cols-4 xl:gap-0 xl:rounded-3xl xl:border xl:border-[#dfdcfa] xl:bg-[#f5f3ff] xl:px-5"
     >
       {
         t.steps.map((step, index) => (
-          <div class="flex items-center justify-center gap-4 px-3 py-5">
-            <span class="flex size-[86px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#eceaff]">
+          <div class="flex min-h-[65px] items-center gap-3.5 rounded-xl border border-[#dfdcfa] bg-[#f5f3ff] px-3 py-2.5 min-[768px]:min-h-[90px] min-[768px]:px-5 min-[768px]:py-3 min-[1024px]:min-h-[96px] min-[1024px]:px-7 sm:min-h-[72px] sm:px-4 lg:justify-between lg:gap-6 xl:min-h-0 xl:justify-center xl:gap-4 xl:rounded-none xl:border-0 xl:bg-transparent xl:px-3 xl:py-5">
+            <span class="flex size-15 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#E8E4FF] lg:size-21.5">
               <img
                 class:list={["object-contain", stepImageSizes[index]]}
                 src={stepImages[index]}
@@ -219,17 +612,30 @@ const stepImageSizes = [
                 aria-hidden="true"
               />
             </span>
-            <b class="text-sm font-bold text-[#151a36]">{step}</b>
+            <b class="text-xs font-bold text-[#151a36] lg:text-2xl">{step}</b>
           </div>
         ))
       }
     </div>
 
-    <div class="mt-16 text-center">
+    <!-- ==================================================== -->
+    <!-- CTA -->
+    <!-- ==================================================== -->
+
+    <div
+      class="mt-8 text-center min-[768px]:mt-8 min-[1024px]:mt-10 min-[1400px]:mt-16 xl:mt-10"
+    >
       <a
-        class="inline-flex min-h-[60px] w-[263px] max-w-full items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-9 py-3 text-sm font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
-        href="#future">{t.cta}<Arrow size={18} aria-hidden="true" /></a
+        class="inline-flex min-h-[40px] w-[124px] max-w-full items-center justify-center gap-1.5 rounded-lg bg-brand-gradient px-4 py-2 text-[11px] font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5 min-[768px]:min-h-[52px] min-[768px]:w-[161px] min-[1024px]:min-h-[52px] min-[1024px]:w-[180px] sm:w-[160px] sm:text-xs xl:min-h-[60px] xl:w-[263px] xl:gap-2.5 xl:rounded-xl xl:px-9 xl:py-3 xl:text-sm"
+        href="#future"
       >
+        {t.cta}
+
+        <Arrow
+          class="size-[14px] min-[768px]:size-4 xl:size-[18px]"
+          aria-hidden="true"
+        />
+      </a>
     </div>
   </div>
 </section>

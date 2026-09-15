@@ -14,7 +14,7 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
 >
   <div class="mx-auto w-[calc(100%-32px)] sm:w-[calc(100%-60px)]">
     <div
-      class="academy-layout grid grid-cols-1 items-center gap-14 lg:grid-cols-[minmax(0,650px)_minmax(0,1fr)] lg:items-start lg:gap-[62px] ltr:[direction:rtl] rtl:[direction:ltr]"
+      class="academy-layout grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:items-start lg:gap-[62px] ltr:[direction:rtl] rtl:[direction:ltr]"
     >
       <figure
         class="relative m-0 mx-auto w-full max-w-[650px] pb-12 lg:mt-1 lg:pb-0"
@@ -73,9 +73,13 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
         </h2>
 
         <p
-          class="mx-auto mt-6 max-w-[540px] text-start text-[13px] leading-[2.05] text-muted lg:text-[14px]"
+          class="mx-auto mt-6 max-w-[540px] text-[13px] leading-[2.05] text-muted lg:text-[14px]"
         >
-          {t.description.map((line) => <span class="block">{line}</span>)}
+          {
+            t.description.map((line) => (
+              <span class="block text-center">{line}</span>
+            ))
+          }
         </p>
 
         <div class="academy-values mt-16 grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -83,18 +87,16 @@ const Arrow = lang === "ar" ? ArrowLeft : ArrowRight;
             t.values.map((value) => (
               <article class="flex min-h-[200px] items-center gap-4 rounded-[18px] bg-white px-5 py-5 text-start shadow-[0_14px_40px_-26px_rgba(49,32,89,.24)] sm:block sm:text-center">
                 <img
-                  class="size-16 shrink-0 object-contain sm:mx-auto"
+                  class="size-16.5 shrink-0 object-contain sm:mx-auto"
                   src={value.image}
-                  width="72"
-                  height="72"
-                  alt=""
+                  alt="{value.title}"
                   aria-hidden="true"
                 />
                 <div class="min-w-0 sm:mt-3">
-                  <h3 class="text-[12px] leading-[1.7] font-black text-ink">
+                  <h3 class="text-base leading-[1.7] font-black text-ink">
                     {value.title}
                   </h3>
-                  <p class="mt-1.5 text-[9px] leading-[1.9] text-muted">
+                  <p class="mt-1.5text-xs leading-[1.9] text-muted">
                     {value.description}
                   </p>
                 </div>

@@ -20,7 +20,7 @@ export const ui = {
       pricing: "الأسعار",
       contact: "تواصل معنا",
       future: "مستقبل طفلك",
-      login: "دخول الطالب",
+      login: "تسجيل الدخول",
       signup: "ابدأ رحلتك الآن ←",
       menu: "فتح القائمة",
       close: "إغلاق القائمة",
