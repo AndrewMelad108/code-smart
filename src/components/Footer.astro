@@ -24,20 +24,16 @@ const sections = [
 const socials = ["f", "in", "tw", "yt"];
 ---
 
-<footer id="footer" class="bg-[#1a3566] text-white lg:min-h-[373px]">
-  <div
-    class="mx-auto w-[calc(100%-40px)] max-w-[1280px] px-0 py-10 md:px-6 md:pt-16 md:pb-8"
-  >
+<footer id="footer" class="bg-[#1a3566] text-white">
+  <div class="mx-auto w-[calc(100%-80px)] px-0 py-10 md:px-6 md:pt-16 md:pb-8">
     <div
       class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-[1.4fr_.64fr_.64fr_.64fr] md:gap-10"
     >
       <div class="md:max-w-[470px]">
         <a href={localizePath("/", lang)}
           ><img
-            class="h-[68px] w-[78px] rounded-[13px] object-contain"
+            class="h-[68px] w-[78px] object-contain"
             src="/code-smart-academy-logo.png"
-            width="1600"
-            height="1600"
             alt="Code Smart Academy"
           /></a
         >
@@ -90,7 +86,7 @@ const socials = ["f", "in", "tw", "yt"];
         <a class="hover:text-white" href="#footer">{t.privacyLink}</a>
       </p>
       <p dir={lang === "ar" ? "rtl" : "ltr"}>
-        © 2024 Code Smart Academy. {t.rights}
+        © 2026 Code Smart Academy. {t.rights}
       </p>
       <a
         href="#home"

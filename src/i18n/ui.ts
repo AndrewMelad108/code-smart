@@ -75,7 +75,8 @@ export const ui = {
           icon: "support",
         },
       ],
-      footer: "نحن لا نعلم فقط.. نحن نلهم ونصنع المستقبل",
+      footer: "نحن لا نعلم فقط.. نحن",
+      footerHighlight: "نلهم ونصنع المستقبل",
     },
     learning: {
       eyebrow: "FRONT-END DEVELOPER",
@@ -356,8 +357,8 @@ export const ui = {
           icon: "support",
         },
       ],
-      footer:
-        "Learning is no longer boring — it is a fun challenge that shapes the future",
+      footer: "We don't just know... we",
+      footerHighlight: "We inspire and create the future.",
     },
     learning: {
       eyebrow: "FRONT-END DEVELOPER",

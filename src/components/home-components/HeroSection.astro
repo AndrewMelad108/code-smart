@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight, ArrowUpLeft, Rocket } from "@lucide/astro";
+import { ArrowUpRight, ArrowUpLeft } from "@lucide/astro";
 import { SIGNUP_URL } from "@/constants";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
@@ -10,28 +10,30 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
 
 <section
   id="home"
-  class="relative min-h-[811px] overflow-hidden bg-hero pt-9 pb-16 md:pt-[60px] md:pb-15"
+  class="relative overflow-hidden bg-hero pt-9 pb-16 md:pt-15 md:pb-15"
   aria-labelledby="hero-title"
 >
-  <img
-    class="pointer-events-none absolute top-12 z-10 hidden h-[110px] w-20 object-contain xl:block ltr:left-[60px] ltr:2xl:left-[calc((100vw-1320px)/2)] rtl:right-[60px] rtl:2xl:right-[calc((100vw-1320px)/2)]"
-    src="/assistant-robot.png"
-    alt="assistant robot"
-    aria-hidden="true"
-  />
-
   <div
-    class="relative z-10 mx-auto grid w-[calc(100%-40px)] max-w-[1320px] grid-cols-1 items-center gap-8 text-center lg:grid-cols-[563px_minmax(0,654px)] lg:justify-between lg:gap-10 lg:text-start"
+    class="relative z-10 grid grid-cols-1 items-center gap-8 text-center lg:grid-cols-[563px_minmax(0,654px)] lg:justify-between lg:gap-10 lg:ps-15 lg:text-start"
   >
-    <div class="mx-auto max-w-[563px] lg:mx-0">
+    <div class="order-2 mx-auto max-w-[563px] lg:order-1 lg:mx-0">
+      <img
+        src="/assistant-robot.png"
+        alt="assistant robot"
+        aria-hidden="true"
+        class="hidden h-27.5 w-20 lg:block"
+      />
       <h1
         id="hero-title"
-        class="text-[34px] leading-[1.35] font-black text-black sm:text-[48px] lg:text-[60px] lg:leading-[1.12] lg:font-bold [:lang(en)_&]:leading-[1.18] [:lang(en)_&]:tracking-tight"
+        class="text-[36px] leading-[1.35] font-black text-black sm:text-[60px] lg:leading-[1.12] lg:font-bold [:lang(en)_&]:leading-[1.18] [:lang(en)_&]:tracking-tight"
       >
         {t.title}<br />{
           lang === "ar" ? (
-            <span class="lg:whitespace-nowrap">
-              <span class="text-green">ونصنع</span>{" "}
+            <span class="whitespace-nowrap">
+              <span class="text-green">
+                {" "}
+                <span class="text-black">و </span>نصنع{" "}
+              </span>
               <span class="text-brand">جيل المستقبل</span>
             </span>
           ) : (
@@ -44,7 +46,9 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
       >
         {t.description}
       </p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:gap-10">
+      <div
+        class="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start lg:gap-10"
+      >
         <a
           class="inline-flex h-[52px] w-[188px] max-w-full items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-6 py-3 text-xs font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
           href={SIGNUP_URL ?? "#future"}
@@ -57,7 +61,9 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
       </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-[654px] md:max-w-[654px]">
+    <div
+      class="relative order-1 mx-auto w-full max-w-[654px] md:max-w-[654px] lg:order-2"
+    >
       <img
         class="relative z-10 w-full object-contain"
         src="/hero-student.jpg"
@@ -70,20 +76,23 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
   </div>
 
   <div
-    class="relative z-20 mx-auto mt-5 grid min-h-[180px] w-[calc(100%-40px)] max-w-[1320px] grid-cols-1 items-center gap-8 rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:grid-cols-[280px_1fr] md:px-10 md:py-6"
+    class="relative z-20 mx-auto mt-5 grid w-[calc(100%-20px)] grid-cols-1 items-center rounded-3xl border border-[#e4e2fa] bg-white/95 px-5 py-5 shadow-card md:px-10 md:py-6 lg:w-[calc(100%-60px)] lg:grid-cols-[364px_1fr]"
   >
-    <div class="flex items-center justify-center gap-3 md:justify-start">
-      <span
-        class="flex size-12 items-center justify-center rounded-[16px] bg-brand-soft text-brand"
-        ><Rocket size={22} aria-hidden="true" /></span
-      >
+    <div class="flex justify-center lg:justify-start">
       <div>
-        <b class="block text-xl font-black text-ink">{t.experience}</b><strong
-          class="mt-0.5 block text-2xl font-black text-green"
+        <b class="block text-[40px] font-black text-ink">{t.experience}</b
+        ><strong class="mt-0.5 block text-[32px] font-black text-green"
           >{t.experienceHighlight}</strong
         >
       </div>
+      <img
+        class="h-25.25 w-25.25 object-contain"
+        src="/why-code-smart-mark.png"
+        alt="why-code-smart-mark"
+        aria-hidden="true"
+      />
     </div>
+
     <div class="relative hidden sm:block">
       <span
         class="absolute inset-x-[5%] top-[32%] z-0 h-1 rounded-full bg-[linear-gradient(90deg,#05df72_0%,#a3b3ff_50%,#e5e7eb_100%)]"
@@ -97,6 +106,7 @@ const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
         aria-hidden="true"
       />
     </div>
+
     <ol
       class="relative m-0 grid list-none grid-cols-2 gap-x-2 gap-y-5 p-0 sm:hidden"
     >

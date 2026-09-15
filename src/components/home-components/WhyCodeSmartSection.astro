@@ -16,18 +16,18 @@ const cardAccents = [
   "text-[#15c7aa]",
   "text-[#7b55ff]",
 ];
-const cardPositions = ["lg:mt-20", "lg:mt-28", "lg:mt-28", "lg:mt-20"];
+const cardPositions = ["lg:mt-20", "lg:mt-32", "lg:mt-28", "lg:mt-20"];
 ---
 
 <section
   id="why-code-smart"
-  class="relative overflow-hidden bg-[#f8f8ff] py-24 md:py-[88px] lg:min-h-[1149px]"
+  class="relative overflow-hidden bg-[#f8f8ff] py-24 md:py-[88px]"
   aria-labelledby="why-title"
 >
-  <div class="mx-auto w-[calc(100%-40px)] max-w-[1320px]">
+  <div class="mx-auto w-[calc(100%-60px)]">
     <header class="mx-auto mb-10 max-w-[820px] text-center md:mb-12">
       <span
-        class="mb-3 block text-[8px] font-extrabold tracking-[.28em] text-[#b9bed6] uppercase"
+        class="mb-3 block text-[11px] font-extrabold tracking-[.28em] text-[#94A3B8] uppercase"
         >{t.eyebrow}</span
       >
       <h2
@@ -71,23 +71,25 @@ const cardPositions = ["lg:mt-20", "lg:mt-28", "lg:mt-28", "lg:mt-20"];
         ))
       }
       <img
-        class="absolute start-1/2 top-0 h-24 w-24 -translate-x-1/2 object-contain rtl:translate-x-1/2"
-        src="/why-code-smart-mark.png"
-        width="276"
-        height="276"
-        alt=""
+        class="absolute inset-s-1/2 -top-15 h-48.5 w-24 -translate-x-1/2 object-contain rtl:translate-x-1/2"
+        src="/ai-assistant-robot.png"
+        alt="assistant robot"
       />
     </div>
-
+    <img
+      src="/ai-assistant-robot.png"
+      alt="assistant robot"
+      class="mx-auto block h-39 w-33.5 lg:hidden"
+    />
     <div
-      class="relative z-10 mx-auto grid max-w-[1320px] grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-[60px]"
+      class="relative z-10 mx-auto grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-15"
     >
       {
         t.cards.map((card, index) => (
           <article
             class:list={[
               "min-h-48 rounded-[10px] border border-[#eef0fb] bg-white px-7 py-7 text-center shadow-card",
-              "lg:min-h-[240px]",
+              "lg:min-h-60",
               cardPositions[index],
             ]}
           >
@@ -126,27 +128,42 @@ const cardPositions = ["lg:mt-20", "lg:mt-28", "lg:mt-28", "lg:mt-20"];
         ))
       }
       <div
-        class="absolute start-1/2 top-4 hidden w-20 -translate-x-1/2 lg:block rtl:translate-x-1/2"
+        class="absolute inset-s-[35%] top-14 -z-10 hidden w-20 lg:block"
         aria-hidden="true"
       >
         <img src="/code-smart-robot.png" width="160" height="192" alt="" />
       </div>
     </div>
     <div class="mx-auto mt-14 flex flex-col items-center">
-      <div class="flex h-1.5 items-center justify-center gap-2" aria-hidden="true">
+      <div
+        class="flex h-1.5 items-center justify-center gap-2"
+        aria-hidden="true"
+      >
         <span class="size-1 rounded-full bg-[#ddd6fe]"></span>
-        <span class="h-px w-12 bg-[linear-gradient(90deg,rgba(221,214,254,0),#ddd6fe)]"></span>
+        <span
+          class="h-px w-12 bg-[linear-gradient(90deg,rgba(221,214,254,0),#ddd6fe)]"
+        ></span>
         <span class="size-1.5 rounded-full bg-[#c4b5fd]"></span>
-        <span class="h-px w-12 bg-[linear-gradient(90deg,#ddd6fe,rgba(221,214,254,0))]"></span>
+        <span
+          class="h-px w-12 bg-[linear-gradient(90deg,#ddd6fe,rgba(221,214,254,0))]"
+        ></span>
         <span class="size-1 rounded-full bg-[#ddd6fe]"></span>
       </div>
       <div class="mt-2 flex h-11 items-center justify-center text-[#7c3aed]">
-        <Heart size={22} fill="currentColor" stroke-width={0} aria-hidden="true" />
+        <Heart
+          size={22}
+          fill="currentColor"
+          stroke-width={0}
+          aria-hidden="true"
+        />
       </div>
       <p
-        class="flex min-h-[60px] w-[400px] max-w-full items-center justify-center rounded-full border border-[#f1f5f9] bg-white px-6 text-center text-[18px] leading-[27px] font-semibold text-[#334155] shadow-[0_1px_4px_rgba(0,0,0,.04),0_4px_24px_rgba(124,58,237,.09)]"
+        class="flex min-h-15 w-100 max-w-full items-center justify-center rounded-full border border-[#f1f5f9] bg-white px-6 text-center text-[18px] leading-[27px] font-semibold text-[#334155] shadow-[0_1px_4px_rgba(0,0,0,.04),0_4px_24px_rgba(124,58,237,.09)]"
       >
         {t.footer}
+        <span class="ms-1 text-[#7C3AED]">
+          {t.footerHighlight}
+        </span>
       </p>
     </div>
   </div>

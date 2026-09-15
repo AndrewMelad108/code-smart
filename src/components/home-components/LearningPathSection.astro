@@ -1,299 +1,1036 @@
 ---
-import {
-  ArrowUpLeft,
-  ArrowUpRight,
-  Braces,
-  Check,
-  Gamepad2,
-  GitBranch,
-  Globe,
-} from "@lucide/astro";
+import { ArrowUpLeft, ArrowUpRight, Check, GitBranch } from "@lucide/astro";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang)("learning");
 const Arrow = lang === "ar" ? ArrowUpLeft : ArrowUpRight;
-const visibleTracks = [t.tracks[2], t.tracks[1], t.tracks[0]];
-const trackStyles = [
-  {
-    position:
-      "order-2 lg:absolute lg:top-[8%] lg:min-h-[380px] lg:w-[280px] lg:order-none rtl:lg:left-[29%] ltr:lg:right-[29%]",
-    number: "bg-[#3156d9]",
-    icon: "bg-[#eef3ff] text-[#3156d9]",
-    check: "text-[#6d82ef]",
-    Icon: Braces,
-  },
-  {
-    position:
-      "order-3 lg:absolute lg:top-[51%] lg:min-h-[370px] lg:w-[280px] lg:order-none rtl:lg:left-[29%] ltr:lg:right-[29%]",
-    number: "bg-[#7050e8]",
-    icon: "bg-[#f2efff] text-[#7050e8]",
-    check: "text-[#8b6cf1]",
-    Icon: Globe,
-  },
-  {
-    position:
-      "order-1 lg:absolute lg:top-[32%] lg:min-h-[380px] lg:w-[280px] lg:order-none rtl:lg:right-0 ltr:lg:left-0",
-    number: "bg-[#20bf6b]",
-    icon: "bg-[#eafaf2] text-[#178c5a]",
-    check: "text-[#21c979]",
-    Icon: Gamepad2,
-  },
-];
+const tracks = [t.tracks[0], t.tracks[2], t.tracks[1]];
+const kinds = ["beginner", "python", "web"];
+const colors = ["#10b981", "#3b5bdb", "#7c3aed"];
 ---
 
-<section
-  id="learning-path"
-  class="relative overflow-hidden bg-[#f7f7ff] pt-20 pb-24 lg:min-h-[1667px]"
-  aria-labelledby="learning-title"
->
-  <div class="mx-auto w-[calc(100%-40px)] max-w-[1320px]">
-    <header class="mx-auto mb-10 max-w-[820px] text-center">
-      <span
-        class="mb-3 block text-[8px] font-extrabold tracking-[.32em] text-[#afb3ca] uppercase"
-        >{t.eyebrow}</span
-      >
-      <h2
-        id="learning-title"
-        class="text-[34px] leading-[1.25] font-black text-brand sm:text-[46px] lg:text-[64px]"
-      >
-        {t.title}
-      </h2>
-      <span
-        class="mx-auto mt-4 block h-0.5 w-14 rounded-full bg-[#5368ef]"
-        aria-hidden="true"
-      ></span>
-      <p class="mx-auto mt-5 max-w-180 text-xs leading-7 text-muted lg:text-sm">
-        {t.description}
-      </p>
-    </header>
+<section id="learning-path" aria-labelledby="learning-title">
+  <header class="roadmap-heading">
+    <span>{t.eyebrow}</span>
+    <h2 id="learning-title">{t.title}</h2>
+    <i></i>
+    <p>{t.description}</p>
+  </header>
 
-    <div class="relative mx-auto lg:h-[1030px]">
-      <img
-        class="absolute top-[2%] z-0 hidden w-[58%] object-contain rtl:-scale-x-100 rtl:lg:-left-[3%] ltr:lg:-right-[3%] lg:block"
-        src="/learning-path-python.png"
-        width="1536"
-        height="1024"
-        alt={t.imageAltPython}
-      />
-      <img
-        class="absolute bottom-[-8%] z-0 hidden w-[104%] object-contain rtl:-scale-x-100 rtl:lg:-right-[3%] ltr:lg:-left-[3%] lg:block"
-        src="/learning-path-web.png"
-        width="2000"
-        height="711"
-        alt={t.imageAltWeb}
-      />
-      <img
-        class="absolute top-[-9%] z-20 hidden w-[305px] rtl:lg:right-0 ltr:lg:left-0 lg:block"
-        src="/learning-student-robot.png"
-        width="680"
-        height="680"
-        alt=""
-        aria-hidden="true"
-      />
-      <img
-        class="absolute bottom-[9%] z-10 hidden w-20 rtl:lg:right-[9%] ltr:lg:left-[9%] lg:block"
-        src="/assistant-robot.png"
-        width="160"
-        height="192"
-        alt=""
-        aria-hidden="true"
-      />
+  <div class="roadmap-scene">
+    <img
+      class="beginner-route"
+      src="/Line%2060.png"
+      alt=""
+      width="47"
+      height="231"
+    />
+    <div class="roadmap-art python-art hidden lg:block">
+      <img src="/learning-path-python.png" width="1536" height="1024" alt="" />
+    </div>
+    <div class="roadmap-art web-art hidden lg:block">
+      <img src="/learning-path-web.png" width="2000" height="711" alt="" />
+    </div>
+    <img src="/green-learning-path-2.png" class="mt-8 block lg:hidden" />
+    <img
+      class="student-robot"
+      src="/learning-student-robot.png"
+      width="680"
+      height="680"
+      alt=""
+    />
+    <img
+      class="python-robot"
+      src="/assistant-robot.png"
+      width="160"
+      height="220"
+      alt=""
+    />
+    <img
+      class="web-robot"
+      src="/assistant-robot.png"
+      width="160"
+      height="220"
+      alt=""
+    />
+    <img
+      class="beginner-platform"
+      src="/green-learning-path.png"
+      width="1364"
+      height="1153"
+      alt=""
+    />
+    <span class="destination-label python-label" dir="ltr"
+      >Python<br />Programmer</span
+    >
+    <span class="destination-label web-label" dir="ltr"
+      >Junior<br />Front-End<br />Developer</span
+    >
 
-      <span
-        class:list={[
-          "absolute top-[29%] z-10 hidden text-center text-xs leading-4 font-black text-brand lg:block",
-          lang === "ar" ? "left-0" : "right-0",
-        ]}
-        dir="ltr"
-      >
-        Python<br />Programmer
-      </span>
-      <span
-        class:list={[
-          "absolute bottom-[8%] z-10 hidden text-center text-xs leading-4 font-black text-brand lg:block",
-          lang === "ar" ? "left-0" : "right-0",
-        ]}
-        dir="ltr"
-      >
-        Junior<br />Front-End<br />Developer
-      </span>
+    <svg class="roadmap-connectors">
+      <path data-link="beginner" fill="none" stroke="#10b981"></path>
+      <path data-link="python" fill="none" stroke="#3b5bdb"></path>
+      <path data-link="web" fill="none" stroke="#7c3aed"></path>
+    </svg>
 
-      <svg
-        class="pointer-events-none absolute inset-0 z-20 hidden h-full w-full ltr:-scale-x-100 lg:block"
-        viewBox="0 0 1320 1030"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M 660 340 C 705 350 720 400 756 430"
-          fill="none"
-          stroke="#6877ed"
-          stroke-width="2"
-          stroke-dasharray="6 7"
-        ></path>
-        <path
-          d="M 660 570 C 705 560 725 520 756 505"
-          fill="none"
-          stroke="#7758eb"
-          stroke-width="2"
-          stroke-dasharray="6 7"
-        ></path>
-        <path
-          d="M 960 505 C 995 505 1010 525 1040 540"
-          fill="none"
-          stroke="#36cda4"
-          stroke-width="2"
-          stroke-dasharray="6 7"
-        ></path>
-      </svg>
-
-      <div
-        class="relative z-30 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:block lg:h-full"
-      >
-        {
-          visibleTracks.map((track, index) => {
-            const TrackIcon = trackStyles[index].Icon;
-
-            return (
-              <article
-                class:list={[
-                  "relative mx-auto flex min-h-80 w-full max-w-sm flex-col rounded-3xl border border-[#e5e6f5] bg-white p-7 text-center shadow-[0_16px_45px_-28px_rgba(48,48,110,.32)]",
-                  trackStyles[index].position,
-                  index === 2 &&
-                    "border-[#7cddb1] shadow-[0_18px_50px_-30px_rgba(33,201,121,.45)]",
-                ]}
-              >
-                <span
-                  class:list={[
-                    "absolute -top-5 rounded-lg px-3 py-2 text-xs font-black text-white shadow-sm",
-                    lang === "ar" ? "right-3" : "left-3",
-                    trackStyles[index].number,
-                  ]}
-                  dir="ltr"
-                >
-                  {track.number}
-                </span>
-                <span
-                  class:list={[
-                    "mx-auto flex size-16 shrink-0 items-center justify-center rounded-full",
-                    trackStyles[index].icon,
-                  ]}
-                >
-                  <TrackIcon size={27} stroke-width={1.8} aria-hidden="true" />
-                </span>
-                <p
-                  class:list={[
-                    "mt-6 text-[11px] font-bold",
-                    index === 2 ? "text-[#16945e]" : "text-brand",
-                  ]}
-                  dir="ltr"
-                >
-                  {track.subtitle}
-                </p>
-                <h3 class="mt-2 text-xl leading-8 font-black text-[#1C3461]">
-                  {track.title}
-                </h3>
-                <ul
-                  class="mt-6 grid list-none gap-3 p-0 text-left text-xs text-[#53617b]"
-                  dir="ltr"
-                >
-                  {track.skills.map((skill) => (
-                    <li class="flex items-center gap-2">
-                      <span class="flex size-4 items-center justify-center rounded-full bg-[#f1f3ff]">
-                        <Check
-                          class={trackStyles[index].check}
-                          size={11}
-                          stroke-width={3}
-                          aria-hidden="true"
-                        />
-                      </span>
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-                <span
-                  class:list={[
-                    "mt-auto rounded-full px-3 py-1.5 text-[9px] font-bold rtl:self-start ltr:self-end",
-                    index === 2
-                      ? "bg-[#edfbf4] text-[#16945e]"
-                      : "bg-[#f3f1ff] text-brand",
-                  ]}
-                >
-                  {index === 2 ? t.beginnerAge : t.advancedAge}
-                </span>
-              </article>
-            );
-          })
-        }
-      </div>
-
-      <div
-        class="relative z-40 mx-auto mt-5 flex min-h-52 w-full max-w-sm flex-col items-center justify-center rounded-3xl border border-[#dfddfb] bg-white/95 p-6 text-center text-[#1C3461] shadow-[0_16px_45px_-28px_rgba(48,48,110,.32)] sm:col-span-2 lg:absolute lg:top-[38%] lg:mt-0 lg:min-h-[230px] lg:w-[208px] rtl:lg:left-[57%] ltr:lg:right-[57%]"
-      >
-        <span
-          class="flex size-16 items-center justify-center rounded-full bg-[#f3f0ff] text-[#7657eb]"
+    {
+      tracks.map((track, index) => (
+        <article
+          class:list={["roadmap-card", `${kinds[index]}-card`]}
+          data-track={kinds[index]}
+          style={`--accent:${colors[index]}`}
         >
-          <GitBranch size={28} aria-hidden="true" />
-        </span>
-        <h3 class="mt-5 text-lg leading-8 font-black">{t.certificate}</h3>
-        <p class="mt-3 text-[10px] leading-5 text-muted">
-          {t.certificateNote}<strong class="block text-brand"
-            >{t.certificateHighlight}</strong
-          >
+          <span class="track-number" dir="ltr">
+            {track.number}
+          </span>
+          <div class="track-heading">
+            <span class="track-icon">
+              {index === 1 ? (
+                <img src="/python-original.svg" width="28" height="28" alt="" />
+              ) : (
+                <span>{index === 0 ? "🎮" : "🌐"}</span>
+              )}
+            </span>
+            <div class="track-titles">
+              <>
+                <p dir="ltr">{track.subtitle}</p>
+                <h3>{track.title}</h3>
+              </>
+            </div>
+          </div>
+          <ul dir="ltr">
+            {(index === 0
+              ? [
+                  track.skills[0],
+                  track.skills[2],
+                  track.skills[1],
+                  track.skills[3],
+                ]
+              : track.skills
+            ).map((skill) => (
+              <li>
+                <span>
+                  <Check size={12} stroke-width={2.5} />
+                </span>
+                {skill}
+              </li>
+            ))}
+          </ul>
+          <span class="track-age">
+            {index === 0 ? t.beginnerAge : t.advancedAge}
+          </span>
+        </article>
+      ))
+    }
+
+    <div class="roadmap-choice">
+      <span class="choice-icon"><GitBranch size={28} stroke-width={2.2} /></span
+      >
+      <div>
+        <h3>{t.certificate}</h3><p>
+          {
+            lang === "ar" ? (
+              <>
+                اختر مسارك حسب
+                <br />
+                ميولك واهتماماتك
+              </>
+            ) : (
+              <>
+                Choose your path around
+                <br />
+                your interests and goals
+              </>
+            )
+          }
         </p>
       </div>
     </div>
-
-    <div
-      class="relative mx-auto mt-16 flex w-full max-w-[840px] flex-col items-center justify-between gap-4 sm:flex-row"
-      dir="ltr"
-    >
-      <span
-        class="absolute inset-x-[8%] top-1/2 hidden border-t-2 border-dashed border-[#7566e9]/35 sm:block"
-        aria-hidden="true"
-      ></span>
-      <span
-        class="relative z-10 inline-flex min-h-[92px] w-full max-w-[370px] items-center justify-center gap-5 rounded-2xl bg-brand-gradient px-7 py-4 text-center text-white shadow-[0_14px_30px_-12px_rgba(89,76,227,.55)]"
-      >
-        <span dir={lang === "ar" ? "rtl" : "ltr"}>
-          <small class="block text-[10px] font-semibold text-white/75"
-            >{t.certificateLabel}</small
-          >
-          <strong class="mt-1 block text-sm font-black" dir="ltr"
-            >{t.junior}</strong
-          >
-        </span>
-        <img
-          class="h-9 w-8 object-contain"
-          src="/reward-points-trophy.png"
-          alt=""
-          aria-hidden="true"
-        />
-      </span>
-      <span
-        class="relative z-10 inline-flex min-h-[92px] w-full max-w-[370px] items-center justify-center gap-5 rounded-2xl bg-brand-gradient px-7 py-4 text-center text-white shadow-[0_14px_30px_-12px_rgba(89,76,227,.55)]"
-      >
-        <span dir={lang === "ar" ? "rtl" : "ltr"}>
-          <small class="block text-[10px] font-semibold text-white/75"
-            >{t.certificateLabel}</small
-          >
-          <strong class="mt-1 block text-sm font-black" dir="ltr"
-            >{t.senior}</strong
-          >
-        </span>
-        <img
-          class="h-9 w-8 object-contain"
-          src="/reward-points-trophy.png"
-          alt=""
-          aria-hidden="true"
-        />
-      </span>
-    </div>
-
-    <a
-      class="mx-auto mt-9 flex min-h-12 w-fit items-center justify-center gap-2.5 rounded-xl bg-brand-gradient px-7 py-3 text-xs font-extrabold text-white shadow-button transition-transform hover:-translate-y-0.5"
-      href="#age-groups">{t.cta}<Arrow size={18} aria-hidden="true" /></a
-    >
+    <span class="roadmap-spark"></span>
   </div>
+
+  <div class="roadmap-destinations" dir="ltr">
+    {
+      [t.junior, t.senior].map((title) => (
+        <div class="roadmap-destination">
+          <>
+            <span dir={lang === "ar" ? "rtl" : "ltr"}>
+              <>
+                <small>{t.certificateLabel}</small>
+                <strong dir="ltr">{title}</strong>
+              </>
+            </span>
+            <span class="destination-trophy">🏆</span>
+          </>
+        </div>
+      ))
+    }
+  </div>
+  <a class="roadmap-cta bg-brand-gradient" href="#age-groups"
+    >{t.cta}<Arrow size={20} /></a
+  >
 </section>
+
+<style>
+  #learning-path {
+    background: #f4f6ff;
+    padding: 20px 0 28px;
+  }
+  .roadmap-heading {
+    text-align: center;
+    padding: 0 16px;
+  }
+  .roadmap-heading > span {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 3px;
+  }
+  .roadmap-heading h2 {
+    margin-top: 24px;
+    font-size: 32px;
+    line-height: 48px;
+    font-weight: 900;
+    background: linear-gradient(130deg, #3b82f6, #7c3aed);
+    background-clip: text;
+    color: transparent;
+  }
+  .roadmap-heading i {
+    display: block;
+    width: 56px;
+    height: 2.5px;
+    margin: 18px auto;
+    background: #6366f1;
+  }
+  .roadmap-heading p {
+    font-size: 14px;
+    line-height: 28px;
+    color: #475569;
+  }
+  .roadmap-scene {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    width: calc(100% - 40px);
+    max-width: 640px;
+    margin: 60px auto 0;
+    isolation: isolate;
+  }
+  .roadmap-card {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 281px;
+    max-width: 100%;
+    min-height: 326px;
+    padding: 28px 20px 16px;
+    border: 0.5px solid color-mix(in srgb, var(--accent) 60%, white);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 8px 24px -18px #4338ca38;
+  }
+  .beginner-card {
+    grid-row: 1;
+    justify-self: end;
+    margin-inline-start: min(28%, 119px);
+  }
+  .python-card {
+    grid-row: 4;
+    justify-self: center;
+  }
+  .web-card {
+    grid-row: 5;
+    justify-self: center;
+  }
+  .track-number {
+    position: absolute;
+    top: -23px;
+    right: 12px;
+    display: grid;
+    place-items: center;
+    min-width: 42px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 36px;
+  }
+  :global(html[dir="ltr"]) .track-number {
+    right: auto;
+    left: 12px;
+  }
+  .track-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .track-titles {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+  }
+  .track-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 7%, white);
+    color: var(--accent);
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .track-icon img {
+    width: 28px;
+    height: 28px;
+  }
+  .track-titles h3 {
+    order: -1;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #1c3461;
+  }
+  .track-titles p {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--accent);
+  }
+  .roadmap-card ul {
+    display: grid;
+    gap: 20px;
+    margin: 24px auto 20px;
+    padding: 0;
+    list-style: none;
+    color: #1c3461;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  .roadmap-card li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .roadmap-card li > span {
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 12%, white);
+    color: var(--accent);
+  }
+  .track-age {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: color-mix(in srgb, var(--accent) 6%, white);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+  }
+  .roadmap-choice {
+    position: relative;
+    z-index: 2;
+    grid-row: 2;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 340px;
+    max-width: 100%;
+    min-height: 128px;
+    padding: 20px;
+    border: 1px solid #e4dfff;
+    border-radius: 24px;
+    background: white;
+    text-align: start;
+  }
+  .choice-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #f5f3ff;
+    color: #673de6;
+  }
+  .roadmap-choice h3 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #172554;
+  }
+  .roadmap-choice p {
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 400;
+    color: #6b7280;
+    margin-top: 8px;
+  }
+  .roadmap-art {
+    pointer-events: none;
+  }
+  .roadmap-art img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: fill;
+  }
+  .python-art,
+  .student-robot,
+  .python-robot,
+  .destination-label,
+  .roadmap-spark {
+    display: none;
+  }
+  .web-art {
+    grid-row: 3;
+    justify-self: center;
+    width: 100%;
+    max-width: 558px;
+    aspect-ratio: 392/228;
+    display: grid;
+    place-items: center;
+  }
+  .web-art img {
+    height: auto;
+  }
+  :global(html[dir="rtl"]) .roadmap-art {
+    transform: scaleX(-1);
+  }
+  .web-robot {
+    position: absolute;
+    top: 145px;
+    inset-inline-start: 4px;
+    width: 80px;
+    height: 110px;
+    max-width: 22%;
+    object-fit: contain;
+    z-index: 1;
+  }
+  .beginner-platform {
+    position: absolute;
+    top: 205px;
+    inset-inline-start: 0;
+    width: 119px;
+    height: 87px;
+    max-width: 28%;
+    object-fit: contain;
+  }
+  .roadmap-connectors {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .roadmap-connectors path {
+    stroke-width: 1.7643;
+    stroke-dasharray: 6.0357 4.6429;
+    opacity: 0.82;
+    vector-effect: non-scaling-stroke;
+  }
+  .roadmap-destinations {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: calc(100% - 40px);
+    max-width: 836px;
+    margin: 40px auto 0;
+  }
+  .roadmap-destinations::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 46px;
+    bottom: 46px;
+    border-left: 2px dashed #b6a8f2;
+  }
+  .roadmap-destination {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 368px;
+    max-width: 100%;
+    min-height: 92px;
+    padding: 20px;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #3b5bdb, #6d29e9);
+    color: #fff;
+    box-shadow: 0 8px 20px -8px #594ce380;
+  }
+  .roadmap-destination small {
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .roadmap-destination strong {
+    display: block;
+    margin-top: 4px;
+    font-size: clamp(14px, 4.54vw, 20px);
+    line-height: 28px;
+    font-weight: 900;
+  }
+  .destination-trophy {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .roadmap-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    max-width: calc(100% - 32px);
+    min-height: 52px;
+    margin: 40px auto 0;
+    padding: 12px 20px;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+  @media (min-width: 1280px) {
+    #learning-path {
+      padding: 0 0 80px;
+    }
+    .roadmap-heading {
+      height: 300px;
+      padding-top: 68px;
+    }
+    .roadmap-heading h2 {
+      font-size: 60px;
+      line-height: 78px;
+      margin-top: 9px;
+    }
+    .roadmap-heading p {
+      font-size: 19px;
+      line-height: 36.1px;
+    }
+    /* Figma 1280 / 1440 frames share this coordinate system. Growth is capped at 1440. */
+    .roadmap-scene {
+      --spread: clamp(0px, calc(75vw - 960px), 120px);
+      display: block;
+      width: calc(100% - 120px);
+      max-width: none;
+      height: calc(965px + var(--spread) * 0.6833333);
+      margin: 0 auto;
+    }
+    .roadmap-card {
+      position: absolute;
+      width: 280px;
+      min-height: 326px;
+      max-width: none;
+    }
+    .beginner-card {
+      inset-inline-start: 0;
+      top: calc(228px + var(--spread) * 0.8833333);
+      margin: 0;
+    }
+    .python-card {
+      inset-inline-end: calc(279px + var(--spread) * 0.9166667);
+      top: calc(61px + var(--spread) * 0.1416667);
+    }
+    .web-card {
+      inset-inline-end: calc(279px + var(--spread) * 0.9166667);
+      top: calc(475px + var(--spread) * 0.4416667);
+    }
+    .roadmap-choice {
+      position: absolute;
+      inset-inline-end: calc(640px + var(--spread));
+      top: calc(289px + var(--spread) * 0.7916667);
+      width: 200px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .roadmap-choice h3 {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 800;
+    }
+    .roadmap-choice p {
+      font-size: 14px;
+      line-height: 22px;
+      margin-top: 13px;
+    }
+    .choice-icon {
+      margin-bottom: 11px;
+    }
+    .roadmap-art {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .python-art {
+      inset-inline-end: 0;
+      top: calc(115px + var(--spread) * 0.0583333);
+      width: calc(600px + var(--spread) * 0.9083333);
+      height: calc(320px + var(--spread) * 0.4666667);
+    }
+    .python-art img {
+      position: absolute;
+      width: 103.061%;
+      height: 105.483%;
+      left: -1.1905%;
+      top: -1.3054%;
+    }
+    .web-art {
+      inset-inline-end: 0;
+      top: calc(548px + var(--spread) * 0.6833333);
+      width: 100%;
+      height: 417px;
+      max-width: none;
+      aspect-ratio: auto;
+    }
+    .web-art img {
+      position: absolute;
+      width: 109.272%;
+      height: 112.532%;
+      left: -4.3874%;
+      top: -4.2278%;
+    }
+    .student-robot {
+      display: block;
+      position: absolute;
+      top: calc(-155px - var(--spread) * 0.0166667);
+      inset-inline-start: 12px;
+      width: calc(283px + var(--spread) * 0.475);
+      height: auto;
+    }
+    .python-robot {
+      display: block;
+      position: absolute;
+      top: calc(29px + var(--spread) * 0.1);
+      inset-inline-end: calc(44px + var(--spread) * 0.1333333);
+      width: 80px;
+      height: 110px;
+      z-index: 1;
+    }
+    .web-robot {
+      top: calc(691px + var(--spread) * 0.75);
+      inset-inline-start: calc(261px + var(--spread) * 0.2583333);
+      width: 80px;
+      height: 110px;
+      max-width: none;
+    }
+    .beginner-platform {
+      display: none;
+    }
+    .destination-label {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      font-size: 20px;
+      line-height: 22px;
+      font-weight: 700;
+      text-align: center;
+    }
+    :global(html[dir="rtl"]) .destination-label {
+      left: 12px;
+      right: auto;
+    }
+    :global(html[dir="ltr"]) .destination-label {
+      right: 12px;
+      left: auto;
+    }
+    .python-label {
+      top: calc(303px + var(--spread) * 0.3166667);
+      color: #3b5bdb;
+    }
+    .web-label {
+      top: calc(799px + var(--spread) * 0.6666667);
+      color: #6d29e9;
+    }
+    .roadmap-destinations {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 100px;
+    }
+    .roadmap-destinations::before {
+      left: 10%;
+      right: 10%;
+      top: 50%;
+      bottom: auto;
+      border-left: 0;
+      border-top: 2px dashed #b6a8f2;
+    }
+    .roadmap-cta {
+      font-size: 20px;
+      line-height: 20px;
+      margin-top: 36px;
+    }
+  }
+  @media (min-width: 1440px) {
+    #learning-path {
+      min-height: 1667px;
+      padding-bottom: 100px;
+    }
+    .roadmap-heading {
+      padding-top: 85px;
+    }
+    .roadmap-heading h2 {
+      font-size: 68px;
+      line-height: 78.2px;
+    }
+    .roadmap-card {
+      height: 378px;
+      padding: 20px 24px;
+      border: 1px solid #eef2ff;
+    }
+    .web-card {
+      height: 370px;
+    }
+    .beginner-card {
+      height: 377px;
+      border-color: #d1fae5;
+    }
+    .track-heading {
+      flex-direction: column;
+      gap: 0;
+    }
+    .track-titles {
+      width: 100%;
+      text-align: center;
+    }
+    .track-titles h3 {
+      order: 0;
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+    .track-titles p {
+      margin-top: 28px;
+    }
+    .track-icon {
+      width: 64px;
+      height: 64px;
+    }
+    .web-card .track-icon {
+      width: 56px;
+      height: 56px;
+    }
+    .roadmap-card ul {
+      gap: 12px;
+      margin: 24px 0 30px;
+    }
+    .track-number {
+      min-width: 60px;
+      height: 46px;
+      font-size: 24px;
+      line-height: 36px;
+    }
+    .track-age {
+      position: absolute;
+      bottom: 20px;
+      inset-inline-start: 24px;
+    }
+    .roadmap-spark {
+      display: block;
+      position: absolute;
+      inset-inline-start: 85px;
+      top: 782px;
+      width: 60px;
+      height: 60px;
+      opacity: 0.5;
+      border-top: 1px dashed #635bff;
+      transform: rotate(-45deg);
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .roadmap-heading h2 {
+      font-size: 40px;
+    }
+    .roadmap-heading p {
+      font-size: 16px;
+    }
+    .roadmap-scene {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 52px;
+      margin-top: 72px;
+    }
+    .beginner-card {
+      grid-column: 1/-1;
+      justify-self: center;
+      margin-inline-start: 119px;
+    }
+    .roadmap-choice {
+      grid-column: 1/-1;
+      justify-self: center;
+      margin-inline-start: 52px;
+    }
+    .web-art {
+      grid-column: 1/-1;
+    }
+    .python-card {
+      grid-row: 4;
+      grid-column: 1;
+    }
+    .web-card {
+      grid-row: 4;
+      grid-column: 2;
+    }
+    .web-robot {
+      inset-inline-start: 124px;
+    }
+    .beginner-platform {
+      inset-inline-start: 120px;
+    }
+  }
+  .beginner-route {
+    display: none;
+  }
+  /* Figma 344:1566: 281 x 326 cards, with the advanced tracks stacked through md. */
+  @media (max-width: 1023px) {
+    .roadmap-scene {
+      width: calc(100% - 40px);
+      max-width: 400px;
+      gap: 0;
+      margin-top: 38.5px;
+    }
+    .roadmap-card {
+      padding: 32px 20px 20px;
+      min-height: 326px;
+    }
+    .beginner-card {
+      width: min(281px, calc(100% - 65px));
+      margin: 0;
+      justify-self: end;
+    }
+    .python-card,
+    .web-card {
+      justify-self: center;
+      margin-top: 50px;
+    }
+    .track-icon {
+      width: 64px;
+      height: 64px;
+    }
+    .track-heading {
+      gap: 16px;
+    }
+    .track-number {
+      height: 40px;
+      min-width: 52px;
+    }
+    .python-card .track-number,
+    .web-card .track-number {
+      left: -10px;
+      right: auto;
+    }
+    .roadmap-card ul {
+      position: relative;
+      width: calc(100% - 29px);
+      margin: 14px 0 16px auto;
+      gap: 8px;
+    }
+    .roadmap-card ul::before {
+      content: "";
+      position: absolute;
+      left: -26px;
+      top: 16px;
+      bottom: 16px;
+      border-left: 1px dotted color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    .roadmap-card li {
+      position: relative;
+      min-height: 32px;
+      padding: 4px 10px 4px 20px;
+      border: 0.5px solid color-mix(in srgb, var(--accent) 10%, white);
+      border-radius: 4px;
+    }
+    .roadmap-card li::before {
+      content: "";
+      position: absolute;
+      width: 19px;
+      left: -26px;
+      top: 50%;
+      border-top: 1px dotted color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    .roadmap-card li::after {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: calc(50% - 2px);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .roadmap-choice {
+      margin-top: 28px;
+      border-radius: 16px;
+      gap: 20px;
+      box-shadow: 0 8px 24px #4338ca12;
+    }
+    .python-art,
+    .web-art {
+      display: none;
+    }
+    .web-robot {
+      top: 137px;
+      inset-inline-start: 15px;
+      width: 80px;
+      height: 110px;
+      max-width: none;
+    }
+    .beginner-platform {
+      top: 201px;
+      inset-inline-start: -0px;
+      width: 119px;
+      height: 87px;
+      max-width: 30%;
+    }
+    .beginner-route {
+      display: block;
+      position: absolute;
+      top: -4px;
+      inset-inline-start: 47px;
+      width: 47px;
+      height: 231px;
+      object-fit: fill;
+    }
+    .roadmap-destinations {
+      max-width: 368px;
+    }
+  }
+  @media (max-width: 399px) {
+    .beginner-card {
+      padding-inline: 12px;
+    }
+    .beginner-card .track-heading {
+      gap: 8px;
+    }
+    .beginner-card .track-icon {
+      width: 40px;
+      height: 40px;
+    }
+    .beginner-card h3 {
+      font-size: 17px;
+    }
+    .beginner-card .track-titles p {
+      font-size: 12px;
+    }
+    .beginner-card ul {
+      font-size: 12px;
+    }
+    .beginner-card li {
+      padding-left: 8px;
+      gap: 8px;
+    }
+    .roadmap-choice {
+      padding: 16px;
+      gap: 12px;
+    }
+    .roadmap-choice h3 {
+      font-size: 18px;
+    }
+    .roadmap-destination {
+      gap: 10px;
+      padding-inline: 12px;
+    }
+    .roadmap-destination strong {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".roadmap-scene").forEach((scene) => {
+    const svg = scene.querySelector<SVGSVGElement>(".roadmap-connectors");
+    const choice = scene.querySelector<HTMLElement>(".roadmap-choice");
+    const cards = [...scene.querySelectorAll<HTMLElement>(".roadmap-card")];
+    if (!svg || !choice) return;
+    const paths = svg.querySelectorAll("path");
+    const update = () => {
+      const bounds = scene.getBoundingClientRect(),
+        c = choice.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      svg.setAttribute("viewBox", `0 0 ${bounds.width} ${bounds.height}`);
+      const desktop = matchMedia("(min-width:1280px)").matches;
+      const spread = desktop
+        ? Math.min(1, Math.max(0, (innerWidth - 1280) / 160))
+        : 0;
+      cards.forEach((card, index) => {
+        const r = card.getBoundingClientRect();
+        let d;
+        if (desktop) {
+          const left = r.left + r.width / 2 < c.left + c.width / 2;
+          const x1 = (left ? r.right : r.left) - bounds.left,
+            x2 = (left ? c.left : c.right) - bounds.left;
+          const y2 =
+            c.top -
+            bounds.top +
+            (index === 0
+              ? 120 - 18 * spread
+              : index === 1
+                ? 20 + 72 * spread
+                : 219 + 15 * spread);
+          const y1 =
+            y2 +
+            (index === 0
+              ? 37 * spread
+              : index === 1
+                ? -85 * spread
+                : -89 * spread);
+          const midpoint = (x1 + x2) / 2;
+          d = `M ${x1} ${y1} C ${midpoint} ${y1} ${midpoint} ${y2} ${x2} ${y2}`;
+        } else if (index === 0) {
+          const platform = scene
+            .querySelector<HTMLElement>(".beginner-platform")!
+            .getBoundingClientRect();
+          const rtl = document.documentElement.dir === "rtl",
+            x1 = platform.left + platform.width / 2 - bounds.left,
+            y1 = platform.bottom - bounds.top;
+          const x2 = (rtl ? c.right : c.left) - bounds.left,
+            y2 = c.top + c.height / 2 - bounds.top,
+            bend = x1 + (rtl ? 20 : -20);
+          d = `M ${x1} ${y1} C ${bend} ${y1} ${bend} ${y2} ${x2} ${y2}`;
+        } else {
+          const x = c.left + c.width * (index === 1 ? 0.45 : 0.6) - bounds.left,
+            y = c.bottom - bounds.top,
+            dx = index === 1 ? -17 : 17;
+          d = `M ${x} ${y} C ${x} ${y + 24} ${x + dx} ${y + 29} ${x + dx} ${y + 53}`;
+        }
+        paths[index]?.setAttribute("d", d);
+        if (index === 2)
+          paths[index]?.setAttribute(
+            "stroke",
+            desktop && spread < 1 ? "#905aef" : "#7c3aed",
+          );
+      });
+    };
+    const observer = new ResizeObserver(update);
+    [scene, choice, ...cards].forEach((e) => observer.observe(e));
+    update();
+  });
+</script>

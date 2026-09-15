@@ -24,10 +24,12 @@ const cardStyles = [
 
 <section
   id="age-groups"
-  class="overflow-hidden bg-[#f9f9ff] py-18 md:py-20 lg:min-h-[534px]"
+  class="overflow-hidden bg-[#f9f9ff] py-18 md:py-20"
   aria-labelledby="ages-title"
 >
-  <div class="mx-auto w-[calc(100%-40px)] max-w-[1320px]">
+  <div
+    class="mx-auto flex w-[calc(100%-60px)] flex-col items-center justify-center lg:block"
+  >
     <header class="mx-auto mb-10 max-w-4xl text-center">
       <span
         class="mb-4 block text-[9px] font-extrabold tracking-[.32em] text-[#a5aaca] uppercase"
@@ -49,7 +51,7 @@ const cardStyles = [
       </p>
     </header>
     <div
-      class="relative grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-10 md:before:absolute md:before:top-1/2 md:before:right-[8%] md:before:left-[8%] md:before:h-1 md:before:-translate-y-1/2 md:before:bg-[#9f73ee]"
+      class="relative grid grid-cols-1 gap-6 before:absolute before:top-[8%] before:bottom-[8%] before:left-1/2 before:w-1 before:-translate-x-1/2 before:bg-[#9f73ee] before:content-[''] lg:grid-cols-3 lg:gap-10 lg:before:top-1/2 lg:before:right-[8%] lg:before:bottom-auto lg:before:left-[8%] lg:before:h-1 lg:before:w-auto lg:before:translate-x-0 lg:before:-translate-y-1/2"
     >
       {
         t.groups.map((group, index) => (
@@ -60,7 +62,7 @@ const cardStyles = [
             ]}
           >
             <img
-              class="h-48 w-[36%] shrink-0 self-end object-contain object-bottom md:h-52 md:w-[38%]"
+              class="h-48 w-[36%] shrink-0 self-end object-contain object-bottom lg:h-52 lg:w-[38%]"
               src={group.image}
               width="562"
               height="1024"
@@ -70,18 +72,18 @@ const cardStyles = [
             <div class="flex min-w-0 flex-1 flex-col self-center py-6 text-start">
               <span
                 class:list={[
-                  "text-xs font-extrabold md:text-sm",
+                  "text-xs font-extrabold lg:text-sm",
                   cardStyles[index].accent,
                 ]}
               >
                 {group.age}
               </span>
-              <h3 class="mt-3 text-sm leading-7 font-black text-ink md:text-base md:leading-8">
+              <h3 class="mt-3 text-sm leading-7 font-black text-ink lg:text-base lg:leading-8">
                 {group.title}
               </h3>
               <div class="mt-5 flex flex-wrap gap-x-4 gap-y-2">
                 {group.skills.map((skill) => (
-                  <span class="inline-flex items-center gap-1.5 text-[10px] font-bold whitespace-nowrap text-[#59627d] md:text-[11px]">
+                  <span class="inline-flex items-center gap-1.5 text-[10px] font-bold whitespace-nowrap text-[#59627d] lg:text-[11px]">
                     <span
                       class:list={[
                         "inline-flex size-4 items-center justify-center rounded-full text-white",
